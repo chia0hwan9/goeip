@@ -1,9 +1,9 @@
-package main
+﻿package main
 
 import (
 	"log"
 
-	"github.com/danomagnum/gologix"
+	"github.com/chia0hwan9/goeip"
 )
 
 // Demo program for reading elements from a DINT array named "TestDintArr" in the controller.

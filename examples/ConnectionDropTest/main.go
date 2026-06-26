@@ -1,4 +1,4 @@
-package main
+﻿package main
 
 import (
 	"bytes"
@@ -6,7 +6,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/danomagnum/gologix"
+	"github.com/chia0hwan9/goeip"
 )
 
 // Demo program for testing PLC connection reliability by reading

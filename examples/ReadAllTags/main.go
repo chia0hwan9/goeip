@@ -1,10 +1,10 @@
-package main
+﻿package main
 
 import (
 	"fmt"
 	"log"
 
-	"github.com/danomagnum/gologix"
+	"github.com/chia0hwan9/goeip"
 )
 
 // Demo program for listing all tags in a controller and reading their values.

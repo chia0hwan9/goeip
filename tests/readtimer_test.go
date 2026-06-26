@@ -1,4 +1,4 @@
-package gologix_tests
+﻿package gologix_tests
 
 import (
 	"bytes"
@@ -6,8 +6,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/danomagnum/gologix"
-	"github.com/danomagnum/gologix/lgxtypes"
+	"github.com/chia0hwan9/goeip"
+	"github.com/chia0hwan9/goeip/lgxtypes"
 )
 
 func TestTimerRead(t *testing.T) {

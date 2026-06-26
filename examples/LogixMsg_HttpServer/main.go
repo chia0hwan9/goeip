@@ -1,4 +1,4 @@
-// this example is for a web server that accepts "push" message from a controller.
+﻿// this example is for a web server that accepts "push" message from a controller.
 // the controller writes using a MSG instruction to this server and that value and tag will show up when doing a http GET
 package main
 
@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/danomagnum/gologix"
+	"github.com/chia0hwan9/goeip"
 )
 
 func main() {

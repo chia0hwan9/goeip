@@ -1,4 +1,4 @@
-# gologix
+﻿# gologix
 
 gologix is a communication driver written in native Go that lets you easily read/write values from tags in Rockwell Automation ControlLogix and CompactLogix PLCs over Ethernet/IP using Go. PLCs that use CIP over Ethernet/IP are supported (ControlLogix, CompactLogix, Micro820). Models like PLC5, SLC, and MicroLogix that use PCCC instead of CIP are *not* supported.
 
@@ -18,7 +18,7 @@ package main
 import (
 	"fmt"
 	"log"
-	"github.com/danomagnum/gologix"
+	"github.com/chia0hwan9/goeip"
 )
 
 func main() {
@@ -53,7 +53,7 @@ import (
 	"log"
 	"os"
 	"time"
-	"github.com/danomagnum/gologix"
+	"github.com/chia0hwan9/goeip"
 )
 
 func main() {

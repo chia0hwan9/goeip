@@ -1,10 +1,10 @@
-package main
+﻿package main
 
 import (
 	"log"
 	"time"
 
-	"github.com/danomagnum/gologix"
+	"github.com/chia0hwan9/goeip"
 )
 
 // Demo program for monitoring a heartbeat tag named "TestHeartBeat" in the controller.

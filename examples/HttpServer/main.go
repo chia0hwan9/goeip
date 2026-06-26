@@ -1,4 +1,4 @@
-// this example is for a web server that allows GET requests to read tags and POST requests to write them.
+﻿// this example is for a web server that allows GET requests to read tags and POST requests to write them.
 package main
 
 import (
@@ -10,7 +10,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/danomagnum/gologix"
+	"github.com/chia0hwan9/goeip"
 )
 
 var Connections = make(map[string]*gologix.Client)

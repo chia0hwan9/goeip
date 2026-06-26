@@ -1,9 +1,9 @@
-package gologix_tests
+﻿package gologix_tests
 
 import (
 	"testing"
 
-	"github.com/danomagnum/gologix"
+	"github.com/chia0hwan9/goeip"
 )
 
 // bug report (issue 8): read list fails if one of the tags is a string.

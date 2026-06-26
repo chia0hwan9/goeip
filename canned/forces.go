@@ -1,9 +1,9 @@
-package canned
+﻿package canned
 
 import (
 	"fmt"
 
-	"github.com/danomagnum/gologix"
+	"github.com/chia0hwan9/goeip"
 )
 
 type ForceStatus uint16

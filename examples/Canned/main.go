@@ -1,10 +1,10 @@
-package main
+﻿package main
 
 import (
 	"log"
 
-	"github.com/danomagnum/gologix"
-	"github.com/danomagnum/gologix/canned"
+	"github.com/chia0hwan9/goeip"
+	"github.com/chia0hwan9/goeip/canned"
 )
 
 func main() {

@@ -1,11 +1,11 @@
-package gologix_tests
+﻿package gologix_tests
 
 import (
 	"log"
 	"testing"
 	"time"
 
-	"github.com/danomagnum/gologix"
+	"github.com/chia0hwan9/goeip"
 )
 
 // This test uses the GenericCIPMessage function to read attributes from a controller.  In this case it is reading

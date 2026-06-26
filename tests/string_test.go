@@ -1,9 +1,9 @@
-package gologix_tests
+﻿package gologix_tests
 
 import (
 	"testing"
 
-	"github.com/danomagnum/gologix"
+	"github.com/chia0hwan9/goeip"
 )
 
 type LilString struct {

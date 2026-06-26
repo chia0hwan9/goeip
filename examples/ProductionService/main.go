@@ -1,4 +1,4 @@
-// This example shows a good way to continuously poll a PLC and get the data back into your main program without having to worry about
+﻿// This example shows a good way to continuously poll a PLC and get the data back into your main program without having to worry about
 // reconnect logic, etc...
 //
 // Obviously this won't work for every scenario but it is a pretty solid foundation for simple things.
@@ -11,7 +11,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/danomagnum/gologix"
+	"github.com/chia0hwan9/goeip"
 )
 
 type PLCPollData struct {

@@ -1,10 +1,10 @@
-package gologix_tests
+﻿package gologix_tests
 
 import (
 	"log"
 	"testing"
 
-	"github.com/danomagnum/gologix"
+	"github.com/chia0hwan9/goeip"
 )
 
 func TestMembersList(t *testing.T) {

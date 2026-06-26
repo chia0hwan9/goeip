@@ -1,4 +1,4 @@
-// This example shows how to create a server that can handle incoming "class 3" cip messages.
+﻿// This example shows how to create a server that can handle incoming "class 3" cip messages.
 // These are messages generated in a program from a msg instruction.
 // From the PLCs perspective we are just another PLC.  When it does a write request to a specific tag we accept that data
 // and when it does a read we send it the data associated with that tag on our end.
@@ -21,7 +21,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/danomagnum/gologix"
+	"github.com/chia0hwan9/goeip"
 )
 
 func main() {

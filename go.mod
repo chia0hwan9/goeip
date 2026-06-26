@@ -1,4 +1,4 @@
-module github.com/danomagnum/gologix
+module github.com/chia0hwan9/goeip
 
 go 1.21
 

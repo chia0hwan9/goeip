@@ -1,11 +1,11 @@
-package gologix_tests
+﻿package gologix_tests
 
 import (
 	"bytes"
 	"testing"
 
-	"github.com/danomagnum/gologix"
-	"github.com/danomagnum/gologix/lgxtypes"
+	"github.com/chia0hwan9/goeip"
+	"github.com/chia0hwan9/goeip/lgxtypes"
 )
 
 func TestCounterRead(t *testing.T) {

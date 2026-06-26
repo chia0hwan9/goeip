@@ -1,11 +1,11 @@
-package main
+﻿package main
 
 import (
 	"fmt"
 	"log"
 	"time"
 
-	"github.com/danomagnum/gologix"
+	"github.com/chia0hwan9/goeip"
 )
 
 // this program will read the current controller time out of the PLC using a custom generic CIP message.

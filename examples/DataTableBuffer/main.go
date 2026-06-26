@@ -1,10 +1,10 @@
-package main
+﻿package main
 
 import (
 	"fmt"
 	"log"
 
-	"github.com/danomagnum/gologix"
+	"github.com/chia0hwan9/goeip"
 )
 
 // Demo program for reading multiple tags at once using a DataTable buffer.

@@ -1,4 +1,4 @@
-// This example shows how to set up a class 1 IO connection.  To support multiple connections you should use the "Ethernet Bridge" module
+﻿// This example shows how to set up a class 1 IO connection.  To support multiple connections you should use the "Ethernet Bridge" module
 // in the IO tree.  Then you should add one "CIP Mdoule" per virtual IO rack position.
 //
 // I think multiple readers should work.  Multiple writers would also appear to work but they would step on each other.
@@ -22,7 +22,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/danomagnum/gologix"
+	"github.com/chia0hwan9/goeip"
 )
 
 // these types will be the input and output data section for the io connection.

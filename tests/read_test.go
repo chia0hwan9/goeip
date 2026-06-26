@@ -1,4 +1,4 @@
-package gologix_tests
+﻿package gologix_tests
 
 import (
 	"fmt"
@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/danomagnum/gologix"
+	"github.com/chia0hwan9/goeip"
 )
 
 func TestReadArrNew(t *testing.T) {

@@ -1,10 +1,10 @@
-package main
+﻿package main
 
 import (
 	"bytes"
 	"log"
 
-	"github.com/danomagnum/gologix"
+	"github.com/chia0hwan9/goeip"
 )
 
 // Demo program for readng an INT tag named "TestInt" in the controller.

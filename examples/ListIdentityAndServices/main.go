@@ -1,11 +1,11 @@
-package main
+﻿package main
 
 import (
 	"fmt"
 	"log"
 	"os"
 
-	"github.com/danomagnum/gologix"
+	"github.com/chia0hwan9/goeip"
 )
 
 // Demo program showing how to use ListIdentity and ListServices

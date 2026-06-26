@@ -1,10 +1,10 @@
-package gologix
+﻿package gologix
 
 import (
 	"bytes"
 	"testing"
 
-	"github.com/danomagnum/gologix/lgxtypes"
+	"github.com/chia0hwan9/goeip/lgxtypes"
 )
 
 func TestPack(t *testing.T) {
