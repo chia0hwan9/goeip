@@ -260,9 +260,29 @@ func (client *Client) write_single(tag string, value any) error {
 		return fmt.Errorf("problem serializing ioi footer. %w", err)
 	}
 
-	err = reqitems[1].Serialize(value)
-	if err != nil {
-		return fmt.Errorf("problem serializing value. %w", err)
+	if client.BoolSize == 2 && datatype == CIPTypeBOOL {
+		// Omron/Inovance: write 2 bytes per BOOL, LSB valid.
+		rv := reflect.ValueOf(value)
+		if rv.Kind() == reflect.Slice {
+			for i := 0; i < rv.Len(); i++ {
+				if rv.Index(i).Bool() {
+					_, _ = reqitems[1].Write([]byte{1, 0})
+				} else {
+					_, _ = reqitems[1].Write([]byte{0, 0})
+				}
+			}
+		} else {
+			if rv.Bool() {
+				_, _ = reqitems[1].Write([]byte{1, 0})
+			} else {
+				_, _ = reqitems[1].Write([]byte{0, 0})
+			}
+		}
+	} else {
+		err = reqitems[1].Serialize(value)
+		if err != nil {
+			return fmt.Errorf("problem serializing value. %w", err)
+		}
 	}
 
 	itemdata, err := serializeItems(reqitems)

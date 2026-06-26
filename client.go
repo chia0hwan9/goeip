@@ -87,6 +87,12 @@ type Client struct {
 	// tag reading functionality.
 	knownFirmware int
 
+	// BoolSize is the number of bytes used for a BOOL on the wire.
+	// Default: 1 (Rockwell/Allen-Bradley Logix).
+	// Set to 2 for Omron NJ/NX and Inovance Easy521 series PLCs,
+	// which use 2-byte alignment with only the LSB valid.
+	BoolSize int
+
 	// protects the connection and connection status
 	mutex      sync.Mutex
 	conn       net.Conn
@@ -174,6 +180,7 @@ func NewClient(ip string) *Client {
 		KnownTypesByID:     make(map[uint32]UDTDescriptor),
 		ioi_cache:          make(map[string]*tagIOI),
 		Logger:             NewLogger(),
+		BoolSize:           1, // default for Rockwell/AB. Set to 2 for Omron/Inovance.
 	}
 
 }

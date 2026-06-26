@@ -127,6 +127,38 @@ func (client *Client) Read(tag string, data any) error {
 		return nil
 
 	case []bool:
+		if client.BoolSize == 2 {
+			// Omron/Inovance: 16 bools packed per WORD (16-bit).
+			elements := len(data)
+			count := elements / 16
+			if count*16 != elements {
+				return fmt.Errorf("slice length must be a multiple of 16 for []bool with BoolSize=2, got %d", elements)
+			}
+			if count == 1 {
+				v, err := read[uint16](client, tag)
+				if err != nil {
+					return err
+				}
+				for i := 0; i < 16; i++ {
+					data[i] = (v & (1 << i)) != 0
+				}
+				return nil
+			}
+			v, err := readArray[uint16](client, tag, uint16(count))
+			if err != nil {
+				return err
+			}
+			if len(v) != count {
+				return fmt.Errorf("got %d instead of %d elements", len(v), elements)
+			}
+			for word := range v {
+				for i := 0; i < 16; i++ {
+					bit := word*16 + i
+					data[bit] = (v[word] & (1 << i)) != 0
+				}
+			}
+			return nil
+		}
 		elements := len(data)
 		count := elements / 32
 		if count*32 != elements {
@@ -541,6 +573,10 @@ func (client *Client) Read_single(tag string, datatype CIPType, elements uint16)
 			value[i], err = readValue(hdr2.Type, &items[1])
 			if err != nil {
 				return nil, fmt.Errorf("problem reading element %d of %s: %w", i, tag, err)
+			}
+			if client.BoolSize == 2 && hdr2.Type == CIPTypeBOOL {
+				// Skip padding byte after each BOOL element (Omron/Inovance 2-byte alignment).
+				items[1].Read(make([]byte, 1))
 			}
 
 		}
@@ -1016,6 +1052,10 @@ func (client *Client) readList(tags []tagDesc) ([]any, error) {
 				value, err := readValue(rHdr.Type, myBytes)
 				if err != nil {
 					return nil, fmt.Errorf("problem reading tag %v: %w", tags[i], err)
+				}
+				if client.BoolSize == 2 && rHdr.Type == CIPTypeBOOL {
+					// Skip padding byte after each BOOL element (Omron/Inovance 2-byte alignment).
+					myBytes.Read(make([]byte, 1))
 				}
 				val[respIndex] = value
 			}
