@@ -11,7 +11,7 @@ func TestListIdentity(t *testing.T) {
 	tcs := getTestConfig()
 	for _, tc := range tcs.GenericCIPTests {
 		t.Run(tc.Address, func(t *testing.T) {
-			client := gologix.NewClient(tc.Address)
+			client := goeip.NewClient(tc.Address)
 			err := client.Connect()
 			if err != nil {
 				t.Error(err)

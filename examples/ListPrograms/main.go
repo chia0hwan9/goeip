@@ -12,12 +12,12 @@ func main() {
 	var err error
 
 	// Setup the client to connect to a PLC with the specified IP address
-	client := gologix.NewClient("192.168.2.245")
+	client := goeip.NewClient("192.168.2.245")
 
 	// For example, to have a controller on slot 1 instead of 0 you could do this:
-	//client.Path, err = gologix.Serialize(gologix.CIPPort{PortNo: 1}, gologix.CIPAddress(1))
+	//client.Path, err = goeip.Serialize(goeip.CIPPort{PortNo: 1}, goeip.CIPAddress(1))
 	// or this:
-	// client.Path, err = gologix.ParsePath("1,1")
+	// client.Path, err = goeip.ParsePath("1,1")
 	client.KeepAliveAutoStart = false
 
 	// Connect to the PLC using parameters in the client struct

@@ -1,4 +1,4 @@
-package gologix
+﻿package goeip
 
 import (
 	"bytes"
@@ -18,7 +18,7 @@ func multi_to_dict(data any) (map[string]interface{}, error) {
 	for i := 0; i < vs.NumField(); i++ {
 		v := vs.Field(i)
 		f := fs.Field(i)
-		fulltag := f.Tag.Get("gologix")
+		fulltag := f.Tag.Get("goeip")
 		switch v.Kind() {
 		case reflect.Struct:
 			d2, err := udt_to_dict(fulltag, v.Interface())

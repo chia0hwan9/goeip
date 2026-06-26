@@ -1,4 +1,4 @@
-package gologix
+﻿package goeip
 
 import (
 	"bytes"
@@ -16,7 +16,7 @@ import (
 func TestBuildListIdentityItemBody(t *testing.T) {
 	srv := NewServer(nil)
 	srv.Attributes[6] = uint32(0xC01E663C)
-	srv.Attributes[7] = "gologix Server_Class3"
+	srv.Attributes[7] = "goeip Server_Class3"
 
 	ip := net.IPv4(192, 168, 1, 50)
 	body, err := buildListIdentityItemBody(srv.Attributes, ip, 44818)
@@ -111,7 +111,7 @@ func TestFrameListIdentityResponse(t *testing.T) {
 	}
 }
 
-// TestSendListIdentityReplyEndToEnd boots a real gologix server in-process
+// TestSendListIdentityReplyEndToEnd boots a real goeip server in-process
 // and drives a List Identity request through the TCP listener exactly like
 // pycomm3 does. The test fails when port 44818 is busy so it stays out of
 // the way of other hardware tests sharing the same bind.
@@ -124,7 +124,7 @@ func TestSendListIdentityReplyEndToEnd(t *testing.T) {
 
 	srv := NewServer(&PathRouter{})
 	srv.Attributes[6] = uint32(0xDEADBEEF)
-	srv.Attributes[7] = "gologix-listidentity-test"
+	srv.Attributes[7] = "goeip-listidentity-test"
 	go func() { _ = srv.Serve() }()
 	defer func() {
 		if srv.TCPListener != nil {

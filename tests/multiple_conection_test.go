@@ -10,7 +10,7 @@ func TestMultipleConns(t *testing.T) {
 	tcs := getTestConfig()
 	for _, tc := range tcs.TagReadWriteTests {
 		t.Run(tc.PlcAddress, func(t *testing.T) {
-			client := gologix.NewClient(tc.PlcAddress)
+			client := goeip.NewClient(tc.PlcAddress)
 			err := client.Connect()
 			if err != nil {
 				t.Error(err)
@@ -23,7 +23,7 @@ func TestMultipleConns(t *testing.T) {
 				}
 			}()
 
-			client2 := gologix.NewClient(tc.PlcAddress)
+			client2 := goeip.NewClient(tc.PlcAddress)
 			err = client2.Connect()
 			if err != nil {
 				t.Error(err)

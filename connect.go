@@ -1,4 +1,4 @@
-package gologix
+﻿package goeip
 
 import (
 	"bytes"
@@ -47,7 +47,7 @@ func (client *Client) startConnect() error {
 //
 // Example:
 //
-//	client := gologix.NewClient("192.168.1.100")
+//	client := goeip.NewClient("192.168.1.100")
 //
 //	// Optional: configure non-default settings
 //	client.Controller.Port = 44818

@@ -1,4 +1,4 @@
-package gologix
+﻿package goeip
 
 import (
 	"bytes"
@@ -46,7 +46,7 @@ func TestParseWriteValuesString(t *testing.T) {
 
 // TestParseWriteValuesAtomic confirms the historic atomic path keeps
 // working — type_info_length is the 0x00 high byte of the uint16 DataType
-// the gologix client serializes; parser must treat that as "no type info"
+// the goeip client serializes; parser must treat that as "no type info"
 // and fall back to readValue.
 func TestParseWriteValuesAtomic(t *testing.T) {
 	var buf bytes.Buffer
@@ -172,7 +172,7 @@ func TestCipStringPackerOverlongDoesNotLeakBytes(t *testing.T) {
 }
 
 // TestServerStringReadRoundTrip verifies a CIP client can read a STRING tag
-// from a gologix server in the same process. Uses the hardcoded EIP port
+// from a goeip server in the same process. Uses the hardcoded EIP port
 // 44818 so the test skips when another process is bound there.
 func TestServerStringReadRoundTrip(t *testing.T) {
 	if probe, err := net.Listen("tcp", "0.0.0.0:44818"); err != nil {

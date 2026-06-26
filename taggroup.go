@@ -1,4 +1,4 @@
-package gologix
+﻿package goeip
 
 import (
 	"fmt"
@@ -237,7 +237,7 @@ func (r *TagGroupResult) Int32(name string) (int32, error) {
 }
 
 // Uint32 returns the uint32 value for the given resolved tag name.
-// Also handles int32→uint32 conversion since gologix returns int32 for
+// Also handles int32→uint32 conversion since goeip returns int32 for
 // DINT tags even when the PLC type is UDINT.
 func (r *TagGroupResult) Uint32(name string) (uint32, error) {
 	v, ok := r.values[name]

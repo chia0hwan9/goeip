@@ -1,4 +1,4 @@
-package gologix
+﻿package goeip
 
 import (
 	"bytes"
@@ -115,7 +115,7 @@ func (h *serverTCPHandler) unconnectedData(item CIPItem) error {
 			// the connection loop and silently drop the reply, which made
 			// FactoryTalk Linx (and any other strict client) interpret the
 			// device as dead and tear down the shortcut bind. See upstream
-			// issue danomagnum/gologix#13.
+			// issue chia0hwan9/goeip#13.
 			h.server.Logger.Warn("unsupported embedded service in UnconnectedSend", "service", emService)
 			return h.sendUnconnectedErrorReply(emService, CIPStatus_ServiceNotSupported)
 		}
@@ -229,7 +229,7 @@ func buildSymbolObjectInstanceListResponse(tags []ServerTagInfo, startInstance u
 // buildProgramObjectGetAttributesAllResponse renders the payload for
 // Get_Attributes_All on Class 0x64 (Logix Program Object) Instance 1. The
 // wire layout that pycomm3.get_plc_name() expects is a SHORT_STRING holding
-// the controller name; the gologix server doesn't have programs in the
+// the controller name; the goeip server doesn't have programs in the
 // Logix sense, so we surface the ProductName from the Identity attributes.
 func buildProgramObjectGetAttributesAllResponse(attrs map[CIPAttribute]any) ([]byte, error) {
 	name, ok := attrs[7].(string)
@@ -417,7 +417,7 @@ func (h *serverTCPHandler) unconnectedServiceGetAttrSingle(item CIPItem) error {
 	// Custom class 0xC8: per-tag attribute container — see
 	// resolveSymbolicTagFromCustomClass. This is the bridge that lets
 	// FactoryTalk View (and any other Get_Attribute_Single client) read
-	// the gologix server's symbolic tags through plain CIA notation
+	// the goeip server's symbolic tags through plain CIA notation
 	// (`CIA:C8:<instance>:1`) without going through the Rockwell-only
 	// Service 0x4B/0x64 tag-browsing extension.
 	if cls == 0xC8 {
@@ -518,7 +518,7 @@ func (h *serverTCPHandler) unconnectedServiceSetAttrSingle(item CIPItem) error {
 	// Parse the incoming value. Layout matches the Get_Attribute_Single
 	// response payload: [CIPType:u8][reserved:u8][data ...] for atomic,
 	// or the cipStringPacker shape (`0xA0 0x02 <CRC2> <LEN u32> <DATA[82]>
-	// <padding[2]>`) for STRING. This is the same wire format the gologix
+	// <padding[2]>`) for STRING. This is the same wire format the goeip
 	// client itself emits for writes, so existing tests cover most of the
 	// parsing edge cases via parseWriteValues.
 	values, err := parseWriteValues(&item)
@@ -541,7 +541,7 @@ func (h *serverTCPHandler) unconnectedServiceSetAttrSingle(item CIPItem) error {
 	return h.sendUnconnectedRRDataReply(CIPService_SetAttributeSingle)
 }
 
-// defaultLocalPath is the routing path that the gologix sample server uses
+// defaultLocalPath is the routing path that the goeip sample server uses
 // to register its in-process tag provider. We use it as the canonical
 // lookup key whenever a CIP request for the custom Class 0xC8 arrives,
 // since these requests don't carry a backplane path of their own.
@@ -645,7 +645,7 @@ func (h *serverTCPHandler) unconnectedServiceRead(item CIPItem) error {
 // peer as alive-but-unsupported and continue gracefully.
 //
 // Reference: ODVA Vol 1 §2-4.5 General Status Codes; upstream issue
-// danomagnum/gologix#13 documents the user-visible impact of silent drops.
+// chia0hwan9/goeip#13 documents the user-visible impact of silent drops.
 func (h *serverTCPHandler) sendUnconnectedErrorReply(s CIPService, status CIPStatus) error {
 	items := make([]CIPItem, 2)
 	items[0] = newItem(cipItem_Null, nil)

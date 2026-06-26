@@ -15,7 +15,7 @@ func main() {
 
 	// Setup the client with the PLC IP address
 	// Replace with your actual device IP
-	client := gologix.NewClient("192.168.2.244")
+	client := goeip.NewClient("192.168.2.244")
 
 	// Connect using parameters in the client struct
 	err = client.Connect()

@@ -13,7 +13,7 @@ import (
 	"github.com/chia0hwan9/goeip"
 )
 
-var Connections = make(map[string]*gologix.Client)
+var Connections = make(map[string]*goeip.Client)
 
 func main() {
 
@@ -30,16 +30,16 @@ func main() {
 
 	log.Printf("=== Connecting to PLCs. ===")
 	for _, plcconf := range Config.PLCs {
-		path, err := gologix.ParsePath(plcconf.Path)
+		path, err := goeip.ParsePath(plcconf.Path)
 		if err != nil {
 			log.Printf("problem with plc connection %s. Can't parse path. %v", plcconf.Name, err)
 			continue
 		}
-		controller := gologix.Controller{
+		controller := goeip.Controller{
 			IpAddress: plcconf.Address,
 			Path:      path,
 		}
-		conn := gologix.Client{
+		conn := goeip.Client{
 			Controller: controller,
 		}
 
@@ -93,7 +93,7 @@ func httpread(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte(fmt.Sprintf("Problem connecting. %v", err)))
 		return
 	}
-	value, err := conn.Read_single(path, gologix.CIPType(0), 1)
+	value, err := conn.Read_single(path, goeip.CIPType(0), 1)
 	if err != nil {
 		w.Write([]byte(fmt.Sprintf("Problem reading. %v", err)))
 		return
@@ -106,7 +106,7 @@ func httpwrite(w http.ResponseWriter, r *http.Request) {
 	// not implemented yet.
 }
 
-func parsePLC(reqPath string) (*gologix.Client, string, error) {
+func parsePLC(reqPath string) (*goeip.Client, string, error) {
 	if reqPath[0] == '/' {
 		reqPath = reqPath[1:]
 	}

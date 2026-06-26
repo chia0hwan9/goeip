@@ -14,7 +14,7 @@ func TestReadArrNew(t *testing.T) {
 	tcs := getTestConfig()
 	for _, tc := range tcs.TagReadWriteTests {
 		t.Run(tc.PlcAddress, func(t *testing.T) {
-			client := gologix.NewClient(tc.PlcAddress)
+			client := goeip.NewClient(tc.PlcAddress)
 			err := client.Connect()
 			if err != nil {
 				t.Error(err)
@@ -48,7 +48,7 @@ func TestReadNewUDT(t *testing.T) {
 	tcs := getTestConfig()
 	for _, tc := range tcs.TagReadWriteTests {
 		t.Run(tc.PlcAddress, func(t *testing.T) {
-			client := gologix.NewClient(tc.PlcAddress)
+			client := goeip.NewClient(tc.PlcAddress)
 			err := client.Connect()
 			if err != nil {
 				t.Error(err)
@@ -77,7 +77,7 @@ func TestReadNewUDTArr(t *testing.T) {
 	tcs := getTestConfig()
 	for _, tc := range tcs.TagReadWriteTests {
 		t.Run(tc.PlcAddress, func(t *testing.T) {
-			client := gologix.NewClient(tc.PlcAddress)
+			client := goeip.NewClient(tc.PlcAddress)
 			err := client.Connect()
 			if err != nil {
 				t.Error(err)
@@ -118,7 +118,7 @@ func TestReadBoolPack(t *testing.T) {
 	tcs := getTestConfig()
 	for _, tc := range tcs.TagReadWriteTests {
 		t.Run(tc.PlcAddress, func(t *testing.T) {
-			client := gologix.NewClient(tc.PlcAddress)
+			client := goeip.NewClient(tc.PlcAddress)
 			err := client.Connect()
 			if err != nil {
 				t.Error(err)
@@ -138,7 +138,7 @@ func TestReadBoolPack(t *testing.T) {
 				Field2 int32
 			}
 
-			//have, err := gologix.ReadPacked[udt2](client, "Program:gologix_tests.ReadUDT2")
+			//have, err := goeip.ReadPacked[udt2](client, "Program:gologix_tests.ReadUDT2")
 			var have udt2
 			err = client.Read("Program:gologix_tests.ReadUDT2", &have)
 			if err != nil {
@@ -162,7 +162,7 @@ func TestReadNew(t *testing.T) {
 	tcs := getTestConfig()
 	for _, tc := range tcs.TagReadWriteTests {
 		t.Run(tc.PlcAddress, func(t *testing.T) {
-			client := gologix.NewClient(tc.PlcAddress)
+			client := goeip.NewClient(tc.PlcAddress)
 			err := client.Connect()
 			if err != nil {
 				t.Error(err)
@@ -209,7 +209,7 @@ func TestReadNew(t *testing.T) {
 	}
 }
 
-func testReadNew[T gologix.GoLogixTypes](t *testing.T, client *gologix.Client, tag string, want T) {
+func testReadNew[T goeip.GoLogixTypes](t *testing.T, client *goeip.Client, tag string, want T) {
 
 	t.Run(tag, func(t *testing.T) {
 		//tag, want := "Program:gologix_tests:ReadInt", int16(999)
@@ -232,18 +232,18 @@ func TestReadMulti(t *testing.T) {
 	// it will test that the library can handle multiple reads in a single forward open on some PLCs and
 	// a single forward open on others.
 	type test_str struct {
-		TestSint          int8    `gologix:"program:gologix_tests.readsint"`
-		TestInt           int16   `gologix:"program:gologix_tests.readint"`
-		TestDint          int32   `gologix:"program:gologix_tests.readdint"`
-		TestReal          float32 `gologix:"program:gologix_tests.readreal"`
-		TestDintArr0      int32   `gologix:"program:gologix_tests.readdints[0]"`
-		TestDintArr0_0    bool    `gologix:"program:gologix_tests.readdints[0].0"`
-		TestDintArr0_9    bool    `gologix:"program:gologix_tests.readdints[0].9"`
-		TestDintArr2      int32   `gologix:"program:gologix_tests.readdints[2]"`
-		TestUDTField1     int32   `gologix:"program:gologix_tests.readudt.field1"`
-		TestUDTField2     float32 `gologix:"program:gologix_tests.readudt.field2"`
-		TestUDTArr2Field1 int32   `gologix:"program:gologix_tests.readudts[2].field1"`
-		TestUDTArr2Field2 float32 `gologix:"program:gologix_tests.readudts[2].field2"`
+		TestSint          int8    `goeip:"program:gologix_tests.readsint"`
+		TestInt           int16   `goeip:"program:gologix_tests.readint"`
+		TestDint          int32   `goeip:"program:gologix_tests.readdint"`
+		TestReal          float32 `goeip:"program:gologix_tests.readreal"`
+		TestDintArr0      int32   `goeip:"program:gologix_tests.readdints[0]"`
+		TestDintArr0_0    bool    `goeip:"program:gologix_tests.readdints[0].0"`
+		TestDintArr0_9    bool    `goeip:"program:gologix_tests.readdints[0].9"`
+		TestDintArr2      int32   `goeip:"program:gologix_tests.readdints[2]"`
+		TestUDTField1     int32   `goeip:"program:gologix_tests.readudt.field1"`
+		TestUDTField2     float32 `goeip:"program:gologix_tests.readudt.field2"`
+		TestUDTArr2Field1 int32   `goeip:"program:gologix_tests.readudts[2].field1"`
+		TestUDTArr2Field2 float32 `goeip:"program:gologix_tests.readudts[2].field2"`
 	}
 	read := test_str{}
 	wants := test_str{
@@ -264,7 +264,7 @@ func TestReadMulti(t *testing.T) {
 	tcs := getTestConfig()
 	for _, tc := range tcs.TagReadWriteTests {
 		t.Run(tc.PlcAddress, func(t *testing.T) {
-			client := gologix.NewClient(tc.PlcAddress)
+			client := goeip.NewClient(tc.PlcAddress)
 			err := client.Connect()
 			if err != nil {
 				t.Error(err)
@@ -296,7 +296,7 @@ func TestReadTimeout(t *testing.T) {
 	for _, tc := range tcs.TagReadWriteTests {
 		t.Run(tc.PlcAddress, func(t *testing.T) {
 
-			client := gologix.NewClient(tc.PlcAddress)
+			client := goeip.NewClient(tc.PlcAddress)
 			client.SocketTimeout = time.Minute
 			err := client.Connect()
 			if err != nil {
@@ -332,7 +332,7 @@ func TestReadTooManyTags(t *testing.T) {
 	tcs := getTestConfig()
 	for _, tc := range tcs.TagReadWriteTests {
 		t.Run(tc.PlcAddress, func(t *testing.T) {
-			client := gologix.NewClient(tc.PlcAddress)
+			client := goeip.NewClient(tc.PlcAddress)
 			err := client.Connect()
 			if err != nil {
 				t.Error(err)
@@ -403,7 +403,7 @@ func TestReadParallel(t *testing.T) {
 	tcs := getTestConfig()
 	for _, tc := range tcs.TagReadWriteTests {
 		t.Run(tc.PlcAddress, func(t *testing.T) {
-			client := gologix.NewClient(tc.PlcAddress)
+			client := goeip.NewClient(tc.PlcAddress)
 			err := client.Connect()
 			if err != nil {
 				t.Error(err)
@@ -450,7 +450,7 @@ func TestReadBoolArray64(t *testing.T) {
 	tcs := getTestConfig()
 	for _, tc := range tcs.TagReadWriteTests {
 		t.Run(tc.PlcAddress, func(t *testing.T) {
-			client := gologix.NewClient(tc.PlcAddress)
+			client := goeip.NewClient(tc.PlcAddress)
 			err := client.Connect()
 			if err != nil {
 				t.Error(err)
@@ -498,7 +498,7 @@ func TestReadBoolArray32(t *testing.T) {
 	tcs := getTestConfig()
 	for _, tc := range tcs.TagReadWriteTests {
 		t.Run(tc.PlcAddress, func(t *testing.T) {
-			client := gologix.NewClient(tc.PlcAddress)
+			client := goeip.NewClient(tc.PlcAddress)
 			err := client.Connect()
 			if err != nil {
 				t.Error(err)
@@ -542,7 +542,7 @@ func TestReadStringArray(t *testing.T) {
 	tcs := getTestConfig()
 	for _, tc := range tcs.TagReadWriteTests {
 		t.Run(tc.PlcAddress, func(t *testing.T) {
-			client := gologix.NewClient(tc.PlcAddress)
+			client := goeip.NewClient(tc.PlcAddress)
 			err := client.Connect()
 			if err != nil {
 				t.Error(err)
@@ -599,7 +599,7 @@ func TestReadUnknownType(t *testing.T) {
 	tcs := getTestConfig()
 	for _, tc := range tcs.TagReadWriteTests {
 		t.Run(tc.PlcAddress, func(t *testing.T) {
-			client := gologix.NewClient(tc.PlcAddress)
+			client := goeip.NewClient(tc.PlcAddress)
 			err := client.Connect()
 			if err != nil {
 				t.Error(err)

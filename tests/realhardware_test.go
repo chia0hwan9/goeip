@@ -13,7 +13,7 @@ func TestRealHardware(t *testing.T) {
 	tcs := getTestConfig()
 	for _, tc := range tcs.TagReadWriteTests {
 		t.Run(tc.PlcAddress, func(t *testing.T) {
-			client := gologix.NewClient(tc.PlcAddress)
+			client := goeip.NewClient(tc.PlcAddress)
 			err := client.Connect()
 			if err != nil {
 				t.Error(err)
@@ -104,7 +104,7 @@ func TestRealHardware(t *testing.T) {
 
 }
 
-func read[T gologix.GoLogixTypes](t *testing.T, client *gologix.Client, path string) {
+func read[T goeip.GoLogixTypes](t *testing.T, client *goeip.Client, path string) {
 	var have T
 	err := client.Read(path, &have)
 	if err != nil {
@@ -114,9 +114,9 @@ func read[T gologix.GoLogixTypes](t *testing.T, client *gologix.Client, path str
 }
 
 type MultiReadStr struct {
-	TI int16   `gologix:"Program:gologix_tests.ReadInt"`
-	TD int32   `gologix:"Program:gologix_tests.ReadDint"`
-	TR float32 `gologix:"Program:gologix_tests.ReadReal"`
+	TI int16   `goeip:"Program:gologix_tests.ReadInt"`
+	TD int32   `goeip:"Program:gologix_tests.ReadDint"`
+	TR float32 `goeip:"Program:gologix_tests.ReadReal"`
 }
 
 type TestUDT struct {
@@ -129,7 +129,7 @@ func TestReadKnown(t *testing.T) {
 	tcs := getTestConfig()
 	for _, tc := range tcs.TagReadWriteTests {
 		t.Run(tc.PlcAddress, func(t *testing.T) {
-			client := gologix.NewClient(tc.PlcAddress)
+			client := goeip.NewClient(tc.PlcAddress)
 			err := client.Connect()
 			if err != nil {
 				t.Error(err)

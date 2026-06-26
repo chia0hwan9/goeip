@@ -11,12 +11,12 @@ func main() {
 	var err error
 
 	// setup the client.  If you need a different path you'll have to set that.
-	client := gologix.NewClient("192.168.2.241")
+	client := goeip.NewClient("192.168.2.241")
 
 	// for example, to have a controller on slot 1 instead of 0 you could do this
-	//client.Path, err = gologix.Serialize(gologix.CIPPort{PortNo: 1}, gologix.CIPAddress(1))
+	//client.Path, err = goeip.Serialize(goeip.CIPPort{PortNo: 1}, goeip.CIPAddress(1))
 	// or this
-	// client.Path, err = gologix.ParsePath("1,1")
+	// client.Path, err = goeip.ParsePath("1,1")
 
 	// connect using parameters in the client struct
 	err = client.Connect()
@@ -32,9 +32,9 @@ func main() {
 	// define a struct where fields have the tag to read from the controller specified
 	// note that tag names are case insensitive.
 	type multiread struct {
-		TestInt  int16   `gologix:"TestInt"`
-		TestDint int32   `gologix:"TestDint"`
-		TestArr  []int32 `gologix:"TestDintArr[2]"`
+		TestInt  int16   `goeip:"TestInt"`
+		TestDint int32   `goeip:"TestDint"`
+		TestArr  []int32 `goeip:"TestDintArr[2]"`
 	}
 	var mr multiread
 	mr.TestArr = make([]int32, 5)

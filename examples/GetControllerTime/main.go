@@ -13,7 +13,7 @@ import (
 // method for this specific purpose, but this example should apply to other devices like drives and other services
 // on PLCs as desired.
 func main() {
-	client := gologix.NewClient("192.168.2.241")
+	client := goeip.NewClient("192.168.2.241")
 	err := client.Connect()
 	if err != nil {
 		fmt.Print(err)
@@ -27,13 +27,13 @@ func main() {
 	}()
 
 	// for generic messages we need to create the cip path ourselves.  The serialize function can be used to do this.
-	path, err := gologix.Serialize(gologix.CipObject_TIME, gologix.CIPInstance(1))
+	path, err := goeip.Serialize(goeip.CipObject_TIME, goeip.CIPInstance(1))
 	if err != nil {
 		log.Printf("could not serialize path: %v", err)
 		return
 	}
 
-	r, err := client.GenericCIPMessage(gologix.CIPService_GetAttributeList, path.Bytes(), []byte{0x01, 0x00, 0x0B, 0x00})
+	r, err := client.GenericCIPMessage(goeip.CIPService_GetAttributeList, path.Bytes(), []byte{0x01, 0x00, 0x0B, 0x00})
 	if err != nil {
 		fmt.Printf("bad result: %v", err)
 		return

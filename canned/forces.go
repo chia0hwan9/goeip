@@ -15,8 +15,8 @@ func (f ForceStatus) Exist() bool {
 	return f&1 != 0
 }
 
-func GetForces(client *gologix.Client) (ForceStatus, error) {
-	item, err := client.GetAttrList(gologix.CipObject_IOClass, 0, 9)
+func GetForces(client *goeip.Client) (ForceStatus, error) {
+	item, err := client.GetAttrList(goeip.CipObject_IOClass, 0, 9)
 	if err != nil {
 		return 0, err
 	}

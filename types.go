@@ -1,4 +1,4 @@
-package gologix
+﻿package goeip
 
 import (
 	"encoding/binary"
@@ -207,7 +207,7 @@ func (c CIPType) String() string {
 	case CIPTypeDWORD:
 		return "0xD3 - DWORD"
 	case CIPTypeSTRING:
-		return "0xFF - (gologix specific) String"
+		return "0xFF - (goeip specific) String"
 	default:
 		return fmt.Sprintf("0x%2x - Unknown", byte(c))
 	}

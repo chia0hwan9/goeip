@@ -11,7 +11,7 @@ func TestReadMultiNew(t *testing.T) {
 	tcs := getTestConfig()
 	for _, tc := range tcs.TagReadWriteTests {
 		t.Run(tc.PlcAddress, func(t *testing.T) {
-			client := gologix.NewClient(tc.PlcAddress)
+			client := goeip.NewClient(tc.PlcAddress)
 			err := client.Connect()
 			if err != nil {
 				t.Error(err)
@@ -25,9 +25,9 @@ func TestReadMultiNew(t *testing.T) {
 			}()
 
 			type multiread struct {
-				TestInt  int16   `gologix:"TestInt"`
-				TestDint int32   `gologix:"TestDint"`
-				TestArr  []int32 `gologix:"TestDintArr[2]"`
+				TestInt  int16   `goeip:"TestInt"`
+				TestDint int32   `goeip:"TestDint"`
+				TestArr  []int32 `goeip:"TestDintArr[2]"`
 			}
 			var mr multiread
 			mr.TestArr = make([]int32, 5)
@@ -64,7 +64,7 @@ func TestReadMap(t *testing.T) {
 	tcs := getTestConfig()
 	for _, tc := range tcs.TagReadWriteTests {
 		t.Run(tc.PlcAddress, func(t *testing.T) {
-			client := gologix.NewClient(tc.PlcAddress)
+			client := goeip.NewClient(tc.PlcAddress)
 			err := client.Connect()
 			if err != nil {
 				t.Error(err)
@@ -122,7 +122,7 @@ func TestReadMapAny(t *testing.T) {
 	tcs := getTestConfig()
 	for _, tc := range tcs.TagReadWriteTests {
 		t.Run(tc.PlcAddress, func(t *testing.T) {
-			client := gologix.NewClient(tc.PlcAddress)
+			client := goeip.NewClient(tc.PlcAddress)
 			err := client.Connect()
 			if err != nil {
 				t.Error(err)
@@ -163,7 +163,7 @@ func TestReadMultiWithGaps(t *testing.T) {
 	tcs := getTestConfig()
 	for _, tc := range tcs.TagReadWriteTests {
 		t.Run(tc.PlcAddress, func(t *testing.T) {
-			client := gologix.NewClient(tc.PlcAddress)
+			client := goeip.NewClient(tc.PlcAddress)
 			err := client.Connect()
 			if err != nil {
 				t.Error(err)
@@ -177,10 +177,10 @@ func TestReadMultiWithGaps(t *testing.T) {
 			}()
 
 			type multiread struct {
-				TestInt  int16 `gologix:"TestInt"`
+				TestInt  int16 `goeip:"TestInt"`
 				NotATag  int32
-				TestDint int32   `gologix:"TestDint"`
-				TestArr  []int32 `gologix:"TestDintArr[2]"`
+				TestDint int32   `goeip:"TestDint"`
+				TestArr  []int32 `goeip:"TestDintArr[2]"`
 			}
 			var mr multiread
 			mr.TestArr = make([]int32, 5)
@@ -220,7 +220,7 @@ func TestReadMultiWithGaps2(t *testing.T) {
 	tcs := getTestConfig()
 	for _, tc := range tcs.TagReadWriteTests {
 		t.Run(tc.PlcAddress, func(t *testing.T) {
-			client := gologix.NewClient(tc.PlcAddress)
+			client := goeip.NewClient(tc.PlcAddress)
 			err := client.Connect()
 			if err != nil {
 				t.Error(err)
@@ -234,10 +234,10 @@ func TestReadMultiWithGaps2(t *testing.T) {
 			}()
 
 			type multiread struct {
-				TestInt  int16 `gologix:"TestInt"`
+				TestInt  int16 `goeip:"TestInt"`
 				NotATag  int32
-				TestDint int32   `gologix:"TestDint"`
-				TestArr  []int32 `gologix:"TestDintArr"`
+				TestDint int32   `goeip:"TestDint"`
+				TestArr  []int32 `goeip:"TestDintArr"`
 			}
 			var mr multiread
 			mr.TestArr = make([]int32, 5)
@@ -277,7 +277,7 @@ func TestReadMultiWithNumArgs(t *testing.T) {
 	tcs := getTestConfig()
 	for _, tc := range tcs.TagReadWriteTests {
 		t.Run(tc.PlcAddress, func(t *testing.T) {
-			client := gologix.NewClient(tc.PlcAddress)
+			client := goeip.NewClient(tc.PlcAddress)
 			err := client.Connect()
 			if err != nil {
 				t.Error(err)
@@ -291,9 +291,9 @@ func TestReadMultiWithNumArgs(t *testing.T) {
 			}()
 
 			type multiread struct {
-				TestInt  int16   `gologix:"TestInt"`
-				TestDint int32   `gologix:"TestDint"`
-				TestArr  []int32 `gologix:"TestDintArr[{0}]"`
+				TestInt  int16   `goeip:"TestInt"`
+				TestDint int32   `goeip:"TestDint"`
+				TestArr  []int32 `goeip:"TestDintArr[{0}]"`
 			}
 			var mr multiread
 			mr.TestArr = make([]int32, 5)
@@ -328,7 +328,7 @@ func TestReadMultiWithStrArgs(t *testing.T) {
 	tcs := getTestConfig()
 	for _, tc := range tcs.TagReadWriteTests {
 		t.Run(tc.PlcAddress, func(t *testing.T) {
-			client := gologix.NewClient(tc.PlcAddress)
+			client := goeip.NewClient(tc.PlcAddress)
 			err := client.Connect()
 			if err != nil {
 				t.Error(err)
@@ -342,8 +342,8 @@ func TestReadMultiWithStrArgs(t *testing.T) {
 			}()
 
 			type multiread struct {
-				TestInt  int16 `gologix:"TestInt"`
-				TestDint int32 `gologix:"program:gologix_tests.{0}.Field1"`
+				TestInt  int16 `goeip:"TestInt"`
+				TestDint int32 `goeip:"program:gologix_tests.{0}.Field1"`
 			}
 			var mr multiread
 

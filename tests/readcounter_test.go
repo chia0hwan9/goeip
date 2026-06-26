@@ -14,7 +14,7 @@ func TestCounterRead(t *testing.T) {
 	tcs := getTestConfig()
 	for _, tc := range tcs.TagReadWriteTests {
 		t.Run(tc.PlcAddress, func(t *testing.T) {
-			client := gologix.NewClient(tc.PlcAddress)
+			client := goeip.NewClient(tc.PlcAddress)
 			err := client.Connect()
 			if err != nil {
 				t.Error(err)
@@ -27,7 +27,7 @@ func TestCounterRead(t *testing.T) {
 				}
 			}()
 
-			//have, err := gologix.ReadPacked[udt2](client, "Program:gologix_tests.ReadUDT2")
+			//have, err := goeip.ReadPacked[udt2](client, "Program:gologix_tests.ReadUDT2")
 			err = client.Read("Program:gologix_tests.TestCounter", &cnt)
 
 			if err != nil {
@@ -59,12 +59,12 @@ func TestCounterRead(t *testing.T) {
 
 			// make sure we can go the other way and recover it.
 			b := bytes.Buffer{}
-			_, err = gologix.Pack(&b, cnt)
+			_, err = goeip.Pack(&b, cnt)
 			if err != nil {
 				t.Errorf("problem packing data: %v", err)
 			}
 			var cnt2 lgxtypes.COUNTER
-			_, err = gologix.Unpack(&b, &cnt2)
+			_, err = goeip.Unpack(&b, &cnt2)
 			if err != nil {
 				t.Errorf("problem unpacking timer: %v", err)
 			}

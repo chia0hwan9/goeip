@@ -1,4 +1,4 @@
-package gologix
+﻿package goeip
 
 import (
 	"encoding/binary"
@@ -407,7 +407,7 @@ func (c cipStringPacker) Bytes() []byte {
 //	    STRING struct (CRC 0x0FCE): [LEN: uint32] [DATA: 82 bytes]
 //
 // For atomic writes type_info_length_bytes is 0 — the field doubles as the
-// high byte of the uint16 DataType the gologix client serializes — so the
+// high byte of the uint16 DataType the goeip client serializes — so the
 // parser falls back to the historic readValue loop. For structured writes
 // (typ == CIPTypeStruct) the segment carries 2 bytes of StructTypeCRC; only
 // the Logix STRING UDT (0x0FCE) is supported here. Other UDTs return an

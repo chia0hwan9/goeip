@@ -15,7 +15,7 @@ func TestControl(t *testing.T) {
 	tcs := getTestConfig()
 	for _, tc := range tcs.TagReadWriteTests {
 		t.Run(tc.PlcAddress, func(t *testing.T) {
-			client := gologix.NewClient(tc.PlcAddress)
+			client := goeip.NewClient(tc.PlcAddress)
 			err := client.Connect()
 			if err != nil {
 				t.Error(err)
@@ -40,7 +40,7 @@ func TestControl(t *testing.T) {
 			}
 
 			for i := range wants {
-				//have, err := gologix.ReadPacked[udt2](client, "Program:gologix_tests.ReadUDT2")
+				//have, err := goeip.ReadPacked[udt2](client, "Program:gologix_tests.ReadUDT2")
 				err = client.Read(fmt.Sprintf("Program:gologix_tests.TestControl[%d]", i), &ctrl)
 				if err != nil {
 					t.Errorf("problem reading %d. %v", i, err)
@@ -50,12 +50,12 @@ func TestControl(t *testing.T) {
 				compareControl(fmt.Sprintf("test %d", i), wants[i], ctrl, t)
 
 				b := bytes.Buffer{}
-				_, err = gologix.Pack(&b, ctrl)
+				_, err = goeip.Pack(&b, ctrl)
 				if err != nil {
 					t.Errorf("problem packing data: %v", err)
 				}
 				var ctrl2 lgxtypes.CONTROL
-				_, err = gologix.Unpack(&b, &ctrl2)
+				_, err = goeip.Unpack(&b, &ctrl2)
 				if err != nil {
 					t.Errorf("problem unpacking %d: %v", i, err)
 				}

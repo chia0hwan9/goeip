@@ -1,4 +1,4 @@
-package gologix
+﻿package goeip
 
 // based on code from https://github.com/loki-os/go-ethernet-ip
 
@@ -36,7 +36,7 @@ const (
 
 // represents the port number on a CIP device
 //
-// If you're going to serialize this class to bytes for transimssion be sure to use one of the gologix
+// If you're going to serialize this class to bytes for transimssion be sure to use one of the goeip
 // serialization functions or call Bytes() to get the properly formatted data.
 type CIPPort struct {
 	PortNo       byte
@@ -104,8 +104,8 @@ func ParsePath(path string) (*bytes.Buffer, error) {
 // Each method appends one logical segment to the path and returns the same *PathBuilder,
 // so calls can be chained:
 //
-//	path := new(gologix.PathBuilder).
-//	    Class(gologix.CIPClass_MessageRouter).
+//	path := new(goeip.PathBuilder).
+//	    Class(goeip.CIPClass_MessageRouter).
 //	    Instance(1).
 //	    Bytes()
 //
@@ -148,9 +148,9 @@ func (pb *PathBuilder) Bytes() []byte {
 
 // Class appends a logical class segment for the given CIPClass to the path.
 // Class segments identify the object class being addressed (e.g. the Message Router class).
-// There are a number of predefined classes in the gologix package.
+// There are a number of predefined classes in the goeip package.
 // If using a constant, there is no need to cast it to CIPClass, e.g. Class(4) is fine.
-// If using a variable, you will have to cast it to CIPClass, e.g. Class(gologix.CipClass(myVar)).
+// If using a variable, you will have to cast it to CIPClass, e.g. Class(goeip.CipClass(myVar)).
 func (pb *PathBuilder) Class(classID CIPClass) *PathBuilder {
 	if pb.Err != nil {
 		return pb
@@ -165,7 +165,7 @@ func (pb *PathBuilder) Class(classID CIPClass) *PathBuilder {
 // Instance appends a logical instance segment for the given CIPInstance to the path.
 // Instance segments select a specific instance of the class identified by the preceding Class segment.
 // If using a constant, there is no need to cast it to CIPInstance, e.g. Instance(1) is fine.
-// If using a variable, you will have to cast it to CIPInstance, e.g. Instance(gologix.CipInstance(myVar)).
+// If using a variable, you will have to cast it to CIPInstance, e.g. Instance(goeip.CipInstance(myVar)).
 func (pb *PathBuilder) Instance(instanceID CIPInstance) *PathBuilder {
 	if pb.Err != nil {
 		return pb
@@ -180,7 +180,7 @@ func (pb *PathBuilder) Instance(instanceID CIPInstance) *PathBuilder {
 // Attribute appends a logical attribute segment for the given CIPAttribute to the path.
 // Attribute segments target a specific attribute within an object instance.
 // If using a constant, there is no need to cast it to CIPAttribute, e.g. Attribute(1) is fine.
-// If using a variable, you will have to cast it to CIPAttribute, e.g. Attribute(gologix.CipAttribute(myVar)).
+// If using a variable, you will have to cast it to CIPAttribute, e.g. Attribute(goeip.CipAttribute(myVar)).
 func (pb *PathBuilder) Attribute(attributeID CIPAttribute) *PathBuilder {
 	if pb.Err != nil {
 		return pb

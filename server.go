@@ -1,4 +1,4 @@
-package gologix
+﻿package goeip
 
 import (
 	"bytes"
@@ -53,7 +53,7 @@ func NewServer(r *PathRouter) *Server {
 	srv.Attributes[4] = int16(0x1412) // Revision
 	srv.Attributes[5] = int16(0x3060) // Status
 	srv.Attributes[6] = rand.Uint32() // Serial
-	srv.Attributes[7] = "Gologix"     // Product Name
+	srv.Attributes[7] = "goeip"     // Product Name
 	return &srv
 }
 

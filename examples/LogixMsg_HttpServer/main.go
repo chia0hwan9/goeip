@@ -13,14 +13,14 @@ import (
 
 func main() {
 
-	r := gologix.PathRouter{}
+	r := goeip.PathRouter{}
 
 	// one memory based tag provider at slot 0 on the virtual "backplane"
 	// a message to 2,xxx.xxx.xxx.xxx,1,0 (compact logix) will get this provider (where xxx.xxx.xxx.xxx is the ip address
 	// of the computer running this server) The message path before the IP address in the msg instruction will be different
 	// based on the actual controller you're using, but the part after the IP address is what this matches
-	p1 := gologix.MapTagProvider{}
-	path1, err := gologix.ParsePath("1,0")
+	p1 := goeip.MapTagProvider{}
+	path1, err := goeip.ParsePath("1,0")
 	if err != nil {
 		log.Printf("problem parsing path. %v", err)
 		os.Exit(1)
@@ -28,7 +28,7 @@ func main() {
 	r.Handle(path1.Bytes(), &p1)
 
 	// create the ethernet/ip class 3 message server
-	s := gologix.NewServer(&r)
+	s := goeip.NewServer(&r)
 	go s.Serve()
 
 	// this is the function that will handle the web requests

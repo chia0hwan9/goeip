@@ -1,4 +1,4 @@
-package gologix
+﻿package goeip
 
 import (
 	"bytes"
@@ -687,15 +687,15 @@ type cipStructHeader struct {
 //
 // This function supports two input types:
 //
-//  1. Struct with gologix field tags:
-//     Each field should have a `gologix:"tagname"` tag specifying the PLC tag to read.
+//  1. Struct with goeip field tags:
+//     Each field should have a `goeip:"tagname"` tag specifying the PLC tag to read.
 //     Field types must match the corresponding CIP types as documented in types.go.
 //
 //     Example:
 //     type MyTags struct {
-//     IntTag    int16     `gologix:"TestInt"`
-//     RealTag   float32   `gologix:"TestReal"`
-//     ArrayTag  []int32   `gologix:"TestDintArr[2]"`  // Read 5 elements starting at index 2
+//     IntTag    int16     `goeip:"TestInt"`
+//     RealTag   float32   `goeip:"TestReal"`
+//     ArrayTag  []int32   `goeip:"TestDintArr[2]"`  // Read 5 elements starting at index 2
 //     }
 //     var tags MyTags
 //     tags.ArrayTag = make([]int32, 5)  // Pre-allocate slice
@@ -722,7 +722,7 @@ type cipStructHeader struct {
 // Example of using arguments for dynamic tag paths:
 //
 //	type Alarms struct {
-//	    Value int32 `gologix:"Machine_{0}.Alarms"`
+//	    Value int32 `goeip:"Machine_{0}.Alarms"`
 //	}
 //	var machine1 Alarms
 //	err := client.ReadMulti(&machine1, 0)  // Reads "Machine_0.Alarms"
@@ -731,7 +731,7 @@ type cipStructHeader struct {
 //
 //
 //	type SubsystemAlarms struct {
-//	    Value int32 `gologix:"Machine_{0}.{1}.Alarms"`
+//	    Value int32 `goeip:"Machine_{0}.{1}.Alarms"`
 //	}
 //	var pusherAlarms SubsystemAlarms
 //	err := client.ReadMulti(&machine1, 0, "pusher")  // Reads "Machine_0.pusher.Alarms"
@@ -757,7 +757,7 @@ func (client *Client) ReadMulti(tag_str any, args ...any) error {
 	val := reflect.ValueOf(tag_str).Elem()
 	for i := range vf {
 		field := vf[i]
-		tagPath, ok := field.Tag.Lookup("gologix")
+		tagPath, ok := field.Tag.Lookup("goeip")
 		if !ok || tagPath == "" {
 			continue
 		}

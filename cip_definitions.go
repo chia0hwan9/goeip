@@ -1,4 +1,4 @@
-package gologix
+﻿package goeip
 
 import (
 	"encoding/binary"
@@ -18,7 +18,7 @@ func (p CIPAddress) Len() int {
 
 // Represents a CIP class attribute id - that is a specific attribute of a given class.
 //
-// If you're going to serialize this class to bytes for transimssion be sure to use one of the gologix
+// If you're going to serialize this class to bytes for transimssion be sure to use one of the goeip
 // serialization functions or call Bytes() to get the properly formatted data.
 type CIPAttribute uint16
 
@@ -85,7 +85,7 @@ func (p CIPAttribute) Len() int {
 
 // used to indicate the array index of data out of an array.
 //
-// If you're going to serialize this class to bytes for transimssion be sure to use one of the gologix
+// If you're going to serialize this class to bytes for transimssion be sure to use one of the goeip
 // serialization functions or call Bytes() to get the properly formatted data.
 type CIPElement uint32
 
@@ -137,7 +137,7 @@ const (
 
 // Represents a CIP class instance id - that is a specific instance of a given class.
 //
-// If you're going to serialize this class to bytes for transimssion be sure to use one of the gologix
+// If you're going to serialize this class to bytes for transimssion be sure to use one of the goeip
 // serialization functions or call Bytes() to get the properly formatted data.
 type CIPInstance uint32
 
@@ -215,7 +215,7 @@ func (p CIPInstance) Len() int {
 // All cip class types are numbered.  Some predefined well-known classes are availabe as constants
 // with the prefix of CIPObject
 //
-// If you're going to serialize this class to bytes for transimssion be sure to use one of the gologix
+// If you're going to serialize this class to bytes for transimssion be sure to use one of the goeip
 // serialization functions or call Bytes() to get the properly formatted data.
 type CIPClass uint16
 

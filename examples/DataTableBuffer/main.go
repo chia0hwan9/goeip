@@ -20,7 +20,7 @@ import (
 func main() {
 
 	// Setup the client.
-	client := gologix.NewClient("192.168.2.241")
+	client := goeip.NewClient("192.168.2.241")
 
 	err := client.Connect()
 	if err != nil {
@@ -47,12 +47,12 @@ func main() {
 		log.Fatalf("Error adding DINT tag: %v", err)
 	}
 
-	err = buf.AddTag("TestReal", gologix.CIPTypeREAL)
+	err = buf.AddTag("TestReal", goeip.CIPTypeREAL)
 	if err != nil {
 		log.Fatalf("Error adding REAL tag: %v", err)
 	}
 
-	err = buf.AddTag("TestInt", gologix.CIPTypeINT)
+	err = buf.AddTag("TestInt", goeip.CIPTypeINT)
 	if err != nil {
 		log.Fatalf("Error adding INT tag: %v", err)
 	}
@@ -86,11 +86,11 @@ func main() {
 		log.Fatalf("Error creating datatable buffer: %v", err)
 	}
 
-	err = buf.AddTags(map[string]gologix.CIPType{
-		"TestDint":   gologix.CIPTypeDINT,
-		"TestReal":   gologix.CIPTypeREAL,
-		"TestInt":    gologix.CIPTypeINT,
-		"TestString": gologix.CIPTypeSTRING,
+	err = buf.AddTags(map[string]goeip.CIPType{
+		"TestDint":   goeip.CIPTypeDINT,
+		"TestReal":   goeip.CIPTypeREAL,
+		"TestInt":    goeip.CIPTypeINT,
+		"TestString": goeip.CIPTypeSTRING,
 	})
 	if err != nil {
 		log.Fatalf("Error batch-adding tags: %v", err)
@@ -125,11 +125,11 @@ func main() {
 		log.Fatalf("Error creating datatable buffer: %v", err)
 	}
 
-	group := gologix.NewTagGroup(
+	group := goeip.NewTagGroup(
 		// Elements=3 expands to: TestDintArray[0], TestDintArray[1], TestDintArray[2]
-		gologix.TagDef{Name: "TestDintArr[{0}]", Type: gologix.CIPTypeDINT, Elements: 3},
+		goeip.TagDef{Name: "TestDintArr[{0}]", Type: goeip.CIPTypeDINT, Elements: 3},
 		// Elements=1 (or omitted) adds a single tag as-is.
-		gologix.TagDef{Name: "TestReal", Type: gologix.CIPTypeREAL},
+		goeip.TagDef{Name: "TestReal", Type: goeip.CIPTypeREAL},
 	)
 
 	// Substitute {0} → 0 and add all expanded tags in a single 0x4E call.
@@ -139,8 +139,8 @@ func main() {
 	}
 
 	type MyStruct struct {
-		TestDint int32 `gologix:"program:gologix_tests.{0}.Field1"`
-		TestInt  int16 `gologix:"TestInt"`
+		TestDint int32 `goeip:"program:gologix_tests.{0}.Field1"`
+		TestInt  int16 `goeip:"TestInt"`
 	}
 
 	var s MyStruct

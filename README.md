@@ -1,6 +1,6 @@
-﻿# gologix
+﻿# goeip
 
-gologix is a communication driver written in native Go that lets you easily read/write values from tags in Rockwell Automation ControlLogix and CompactLogix PLCs over Ethernet/IP using Go. PLCs that use CIP over Ethernet/IP are supported (ControlLogix, CompactLogix, Micro820). Models like PLC5, SLC, and MicroLogix that use PCCC instead of CIP are *not* supported.
+goeip is a communication driver written in native Go that lets you easily read/write values from tags in Rockwell Automation ControlLogix and CompactLogix PLCs over Ethernet/IP using Go. PLCs that use CIP over Ethernet/IP are supported (ControlLogix, CompactLogix, Micro820). Models like PLC5, SLC, and MicroLogix that use PCCC instead of CIP are *not* supported.
 
 It is modeled after pylogix with changes to make it usable in Go with a goal of being similar in usage patterns to modules of the go standard library.
 
@@ -22,7 +22,7 @@ import (
 )
 
 func main() {
-	client := gologix.NewClient("192.168.2.241")
+	client := goeip.NewClient("192.168.2.241")
 	err := client.Connect()
 	if err != nil {
 		log.Printf("Error opening client: %v", err)
@@ -57,17 +57,17 @@ import (
 )
 
 func main() {
-	r := gologix.PathRouter{}
+	r := goeip.PathRouter{}
 
-	p1 := gologix.MapTagProvider{}
-	path1, err := gologix.ParsePath("1,0")
+	p1 := goeip.MapTagProvider{}
+	path1, err := goeip.ParsePath("1,0")
 	if err != nil {
 		log.Printf("Problem parsing path: %v", err)
 		os.Exit(1)
 	}
 	r.AddHandler(path1.Bytes(), &p1)
 
-	s := gologix.NewServer(&r)
+	s := goeip.NewServer(&r)
 	go s.Serve()
 
 	t := time.NewTicker(time.Second * 5)

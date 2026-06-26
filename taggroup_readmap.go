@@ -1,4 +1,4 @@
-package gologix
+﻿package goeip
 
 import "fmt"
 
@@ -11,9 +11,9 @@ import "fmt"
 //
 // Example:
 //
-//	group := gologix.NewTagGroup(
-//	    gologix.TagDef{Name: "RATE[{0}]", Type: gologix.CIPTypeREAL},
-//	    gologix.TagDef{Name: "STATS[{0},0]", Type: gologix.CIPTypeDINT, Elements: 5},
+//	group := goeip.NewTagGroup(
+//	    goeip.TagDef{Name: "RATE[{0}]", Type: goeip.CIPTypeREAL},
+//	    goeip.TagDef{Name: "STATS[{0},0]", Type: goeip.CIPTypeDINT, Elements: 5},
 //	)
 //	result, err := client.ReadTagGroup(group, 1)
 //	rate, _ := result.Float32("RATE[1]")

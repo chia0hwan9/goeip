@@ -1,4 +1,4 @@
-package main
+﻿package main
 
 import (
 	"bytes"
@@ -16,7 +16,7 @@ func main() {
 	var err error
 
 	// setup the client for an Omron/Inovance controller
-	client := gologix.NewClient("192.168.2.100")
+	client := goeip.NewClient("192.168.2.100")
 	// Micro8xx / Omron NJ use no backplane path. Adjust as needed for your device.
 	client.Controller.Path = &bytes.Buffer{}
 	// KEY: set BoolSize to 2 for Omron/Inovance 2-byte BOOL alignment

@@ -1,4 +1,4 @@
-package gologix
+﻿package goeip
 
 import (
 	"bytes"
@@ -69,7 +69,7 @@ func dataTablePath(instanceID uint16) []byte {
 // protocol's dataTypeSize field (LE16). This is a byte count, not a CIP type code.
 //
 // For most atomic types this matches CIPType.Size(). The exception is CIPTypeSTRING
-// (gologix internal 0xFF) which returns Size()=1 but the datatable protocol expects
+// (goeip internal 0xFF) which returns Size()=1 but the datatable protocol expects
 // 88 bytes (4-byte .LEN + 82-byte .DATA + 2 pad for standard AB STRING).
 func dataTableTypeSize(t CIPType) (uint16, error) {
 	switch t {
@@ -305,7 +305,7 @@ func (client *Client) DataTableRemoveTag(instanceID uint16, tagIndex uint16) err
 //	}
 //	defer buf.Close()
 //
-//	buf.AddTag("MyDINT", gologix.CIPTypeDINT)
+//	buf.AddTag("MyDINT", goeip.CIPTypeDINT)
 //	values, err := buf.ReadAll()
 func (client *Client) NewDataTableBuffer() (*DataTableBuffer, error) {
 	instanceID, err := client.CreateDataTableBuffer()
@@ -737,7 +737,7 @@ func (buf *DataTableBuffer) AddTagGroup(group *TagGroup, args ...any) error {
 // Struct Tag integration
 // ---------------------------------------------------------------------------
 
-// AddTaggedStruct adds all tags from a tagged go struct (with `gologix` struct tags)
+// AddTaggedStruct adds all tags from a tagged go struct (with `goeip` struct tags)
 // to this datatable buffer. Args substitute {0}, {1}, ... placeholders in tag names.
 //
 // Automatically sets references to struct fields in the Var field of each buffer tag,
@@ -748,9 +748,9 @@ func (buf *DataTableBuffer) AddTagGroup(group *TagGroup, args ...any) error {
 // Example:
 //
 //	    type MyTags struct {
-//	    IntTag    int16     `gologix:"Machine{0}TestInt"`
-//	    RealTag   float32   `gologix:"Machine{0}TestReal"`
-//	    ArrayTag  []int32   `gologix:"Machine{0}TestDintArr[2]"`  // Read 5 elements starting at index 2
+//	    IntTag    int16     `goeip:"Machine{0}TestInt"`
+//	    RealTag   float32   `goeip:"Machine{0}TestReal"`
+//	    ArrayTag  []int32   `goeip:"Machine{0}TestDintArr[2]"`  // Read 5 elements starting at index 2
 //	    }
 //	    var tags1 MyTags
 //	    var tags2 MyTags
@@ -778,7 +778,7 @@ func (buf *DataTableBuffer) AddTaggedStruct(str any, args ...any) error {
 
 	for i := range vf {
 		field := vf[i]
-		tagPath, ok := field.Tag.Lookup("gologix")
+		tagPath, ok := field.Tag.Lookup("goeip")
 		if !ok || tagPath == "" {
 			continue
 		}

@@ -11,7 +11,7 @@ func TestReadListWithString(t *testing.T) {
 	tcs := getTestConfig()
 	for _, tc := range tcs.TagReadWriteTests {
 		t.Run(tc.PlcAddress, func(t *testing.T) {
-			client := gologix.NewClient(tc.PlcAddress)
+			client := goeip.NewClient(tc.PlcAddress)
 			err := client.Connect()
 			if err != nil {
 				t.Error(err)
@@ -91,7 +91,7 @@ func TestReadMultiWithString(t *testing.T) {
 	tcs := getTestConfig()
 	for _, tc := range tcs.TagReadWriteTests {
 		t.Run(tc.PlcAddress, func(t *testing.T) {
-			client := gologix.NewClient(tc.PlcAddress)
+			client := goeip.NewClient(tc.PlcAddress)
 			err := client.Connect()
 			if err != nil {
 				t.Error(err)
@@ -105,11 +105,11 @@ func TestReadMultiWithString(t *testing.T) {
 			}()
 
 			type customRead struct {
-				ReadBool   bool    `gologix:"program:gologix_tests.ReadBool"`
-				ReadDint   int32   `gologix:"program:gologix_tests.ReadDint"`
-				ReadString string  `gologix:"program:gologix_tests.ReadString"`
-				ReadReal   float32 `gologix:"program:gologix_tests.ReadReal"`
-				ReadDint0  int32   `gologix:"program:gologix_tests.ReadDints[0]"`
+				ReadBool   bool    `goeip:"program:gologix_tests.ReadBool"`
+				ReadDint   int32   `goeip:"program:gologix_tests.ReadDint"`
+				ReadString string  `goeip:"program:gologix_tests.ReadString"`
+				ReadReal   float32 `goeip:"program:gologix_tests.ReadReal"`
+				ReadDint0  int32   `goeip:"program:gologix_tests.ReadDints[0]"`
 			}
 
 			var cr customRead
@@ -152,7 +152,7 @@ func TestReadListWithStringArray(t *testing.T) {
 	tcs := getTestConfig()
 	for _, tc := range tcs.TagReadWriteTests {
 		t.Run(tc.PlcAddress, func(t *testing.T) {
-			client := gologix.NewClient(tc.PlcAddress)
+			client := goeip.NewClient(tc.PlcAddress)
 			err := client.Connect()
 			if err != nil {
 				t.Error(err)
@@ -214,7 +214,7 @@ func TestReadWithStringArray(t *testing.T) {
 	tcs := getTestConfig()
 	for _, tc := range tcs.TagReadWriteTests {
 		t.Run(tc.PlcAddress, func(t *testing.T) {
-			client := gologix.NewClient(tc.PlcAddress)
+			client := goeip.NewClient(tc.PlcAddress)
 			err := client.Connect()
 			if err != nil {
 				t.Error(err)

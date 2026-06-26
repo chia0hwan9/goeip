@@ -11,7 +11,7 @@ func TestListServices(t *testing.T) {
 	tcs := getTestConfig()
 	for _, tc := range tcs.GenericCIPTests {
 		t.Run(tc.Address, func(t *testing.T) {
-			client := gologix.NewClient(tc.Address)
+			client := goeip.NewClient(tc.Address)
 			err := client.Connect()
 			if err != nil {
 				t.Error(err)
@@ -40,7 +40,7 @@ func TestListServices(t *testing.T) {
 					t.Errorf("Name mismatch on entry %d. Have %s. Want %s.", i, service.Name, tc.Services[i].Name)
 				}
 
-				if service.Capabilities != gologix.ServiceCapabilityFlags(tc.Services[i].Capabilities) {
+				if service.Capabilities != goeip.ServiceCapabilityFlags(tc.Services[i].Capabilities) {
 					t.Errorf("Capabilities mismatch on entry %d. Have %d. Want %d.", i, service.Capabilities, tc.Services[i].Capabilities)
 				}
 			}

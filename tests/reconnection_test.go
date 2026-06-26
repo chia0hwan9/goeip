@@ -10,7 +10,7 @@ func TestReconnection(t *testing.T) {
 	tcs := getTestConfig()
 	for _, tc := range tcs.TagReadWriteTests {
 		t.Run(tc.PlcAddress, func(t *testing.T) {
-			client := gologix.NewClient(tc.PlcAddress)
+			client := goeip.NewClient(tc.PlcAddress)
 			client.KeepAliveAutoStart = false
 			err := client.Connect()
 			if err != nil {
@@ -68,7 +68,7 @@ func TestNoReconnection(t *testing.T) {
 	tcs := getTestConfig()
 	for _, tc := range tcs.TagReadWriteTests {
 		t.Run(tc.PlcAddress, func(t *testing.T) {
-			client := gologix.NewClient(tc.PlcAddress)
+			client := goeip.NewClient(tc.PlcAddress)
 			client.AutoConnect = false
 			err := client.Connect()
 			if err != nil {

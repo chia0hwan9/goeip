@@ -158,9 +158,9 @@ func (f FaultType) OPCUAFault() bool {
 	return f&FaultType_OPCUA != 0
 }
 
-func GetFaults(client *gologix.Client) (FaultSummary, error) {
-	path, _ := gologix.Serialize(gologix.CIPClass(0x73), gologix.CIPInstance(0x1))
-	item, err := client.GenericCIPMessage(gologix.CIPService_GetAttributeAll, path.Bytes(), nil)
+func GetFaults(client *goeip.Client) (FaultSummary, error) {
+	path, _ := goeip.Serialize(goeip.CIPClass(0x73), goeip.CIPInstance(0x1))
+	item, err := client.GenericCIPMessage(goeip.CIPService_GetAttributeAll, path.Bytes(), nil)
 
 	if err != nil {
 		return FaultSummary{}, err

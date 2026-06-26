@@ -1,4 +1,4 @@
-package gologix
+﻿package goeip
 
 import (
 	"encoding/binary"
@@ -7,7 +7,7 @@ import (
 
 // Represents a CIP service id
 //
-// If you're going to serialize this class to bytes for transimssion be sure to use one of the gologix
+// If you're going to serialize this class to bytes for transimssion be sure to use one of the goeip
 // serialization functions or call Bytes() to get the properly formatted data.
 type CIPService byte
 

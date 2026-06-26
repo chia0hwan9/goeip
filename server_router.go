@@ -1,4 +1,4 @@
-package gologix
+﻿package goeip
 
 import (
 	"errors"
@@ -247,7 +247,7 @@ func convertToElement(value any, target reflect.Type) (any, error) {
 // the Symbol Object (Class 0x6B) GetInstanceAttributeList handler so external
 // clients (pycomm3, FactoryTalk View Tag Browser, Studio 5000) can discover
 // tag names without prior knowledge — i.e., what every Logix controller
-// exposes by default and what gologix Server_Class3 was missing before.
+// exposes by default and what goeip Server_Class3 was missing before.
 func (p *MapTagProvider) TagList() []ServerTagInfo {
 	p.Mutex.Lock()
 	defer p.Mutex.Unlock()

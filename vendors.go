@@ -1,4 +1,4 @@
-package gologix
+﻿package goeip
 
 type VendorId uint16
 

@@ -14,7 +14,7 @@ func TestGenericCIPMessage1(t *testing.T) {
 	tcs := getTestConfig()
 	for _, tc := range tcs.TagReadWriteTests {
 		t.Run(tc.PlcAddress, func(t *testing.T) {
-			client := gologix.NewClient(tc.PlcAddress)
+			client := goeip.NewClient(tc.PlcAddress)
 			err := client.Connect()
 			if err != nil {
 				t.Error(err)
@@ -27,12 +27,12 @@ func TestGenericCIPMessage1(t *testing.T) {
 				}
 			}()
 
-			path, err := gologix.Serialize(gologix.CipObject_TIME, gologix.CIPInstance(1))
+			path, err := goeip.Serialize(goeip.CipObject_TIME, goeip.CIPInstance(1))
 			if err != nil {
 				t.Errorf("could not serialize path: %v", err)
 				return
 			}
-			r, err := client.GenericCIPMessage(gologix.CIPService_GetAttributeList, path.Bytes(), []byte{0x01, 0x00, 0x0B, 0x00})
+			r, err := client.GenericCIPMessage(goeip.CIPService_GetAttributeList, path.Bytes(), []byte{0x01, 0x00, 0x0B, 0x00})
 			if err != nil {
 				t.Errorf("bad result: %v", err)
 				return
@@ -59,7 +59,7 @@ func TestGenericCIPMessage1(t *testing.T) {
 /*
 func TestGenericCIPMessage2(t *testing.T) {
 	tc := getTestConfig()
-	client := gologix.NewClient(tc.PLC_Address)
+	client := goeip.NewClient(tc.PLC_Address)
 	err := client.Connect()
 	if err != nil {
 		t.Error(err)
@@ -72,7 +72,7 @@ func TestGenericCIPMessage2(t *testing.T) {
 		}
 	}()
 
-	path, err := gologix.Serialize(gologix.CIPClass(0x04), gologix.CIPInstance(0x303), gologix.CIPAttribute(0x03))
+	path, err := goeip.Serialize(goeip.CIPClass(0x04), goeip.CIPInstance(0x303), goeip.CIPAttribute(0x03))
 	if err != nil {
 		t.Errorf("could not serialize path: %v", err)
 		return

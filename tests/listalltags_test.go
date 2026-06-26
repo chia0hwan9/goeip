@@ -12,7 +12,7 @@ func TestList(t *testing.T) {
 	tcs := getTestConfig()
 	for _, tc := range tcs.TagReadWriteTests {
 		t.Run(tc.PlcAddress, func(t *testing.T) {
-			client := gologix.NewClient(tc.PlcAddress)
+			client := goeip.NewClient(tc.PlcAddress)
 			err := client.Connect()
 			if err != nil {
 				t.Error(err)
@@ -34,18 +34,18 @@ func TestList(t *testing.T) {
 			log.Printf("Tags: %+v\n", client.KnownTags["testdintarr"])
 
 			// check that we picked up all the test tags properly
-			tests := make(map[string]gologix.KnownTag)
-			tests["testdintarr"] = gologix.KnownTag{
+			tests := make(map[string]goeip.KnownTag)
+			tests["testdintarr"] = goeip.KnownTag{
 				Name: "TestDintArr",
-				Info: gologix.TagInfo{
-					Type: gologix.CIPTypeDINT,
+				Info: goeip.TagInfo{
+					Type: goeip.CIPTypeDINT,
 				},
 				Array_Order: []int{10},
 			}
-			tests["testdint"] = gologix.KnownTag{
+			tests["testdint"] = goeip.KnownTag{
 				Name: "TestDint",
-				Info: gologix.TagInfo{
-					Type: gologix.CIPTypeDINT,
+				Info: goeip.TagInfo{
+					Type: goeip.CIPTypeDINT,
 				},
 				Array_Order: []int{},
 			}

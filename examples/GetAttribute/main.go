@@ -11,12 +11,12 @@ func main() {
 	var err error
 
 	// setup the client.  If you need a different path you'll have to set that.
-	client := gologix.NewClient("192.168.2.241")
+	client := goeip.NewClient("192.168.2.241")
 
 	// for example, to have a controller on slot 1 instead of 0 you could do this
-	//client.Path, err = gologix.Serialize(gologix.CIPPort{PortNo: 1}, gologix.CIPAddress(1))
+	//client.Path, err = goeip.Serialize(goeip.CIPPort{PortNo: 1}, goeip.CIPAddress(1))
 	// or this
-	// client.Path, err = gologix.ParsePath("1,1")
+	// client.Path, err = goeip.ParsePath("1,1")
 
 	// connect using parameters in the client struct
 	err = client.Connect()
@@ -38,7 +38,7 @@ func main() {
 	// 5 - Status
 	// 6 - Serial Number
 	// 7 - Product Name
-	item, err := client.GetAttrSingle(gologix.CipObject_Identity, 1, 1)
+	item, err := client.GetAttrSingle(goeip.CipObject_Identity, 1, 1)
 	if err != nil {
 		log.Fatalf("problem reading attribute 1: %v", err)
 	}
@@ -55,7 +55,7 @@ func main() {
 	}
 	log.Printf("Vendor ID: %X", vendor)
 
-	item, err = client.GetAttrList(gologix.CipObject_Identity, 1, 1, 2, 3, 4)
+	item, err = client.GetAttrList(goeip.CipObject_Identity, 1, 1, 2, 3, 4)
 	if err != nil {
 		log.Fatalf("problem reading list: %v", err)
 	}

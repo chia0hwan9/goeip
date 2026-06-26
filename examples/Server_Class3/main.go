@@ -9,8 +9,8 @@
 // up based on the cip path after that.  The example uses 1, 0 and 1,1 which equates to backplane slot 0 and backplane slot 1 respectively.
 //
 // If you look at the screenshots of MSG insructions in this folder you'll see how the read and write are setup.  Note that on the
-// connection tab of the msg setup the path is "gologix, 1, 0" this is because there is a generic ethernet module in the IO config
-// with the same address as the computer used for the screenshots.  You can just type the IP address in here instead of "gologix".
+// connection tab of the msg setup the path is "goeip, 1, 0" this is because there is a generic ethernet module in the IO config
+// with the same address as the computer used for the screenshots.  You can just type the IP address in here instead of "goeip".
 //
 // Note that you won't be able to have multiple servers on a single computer.  They bind to the EIP ports on TCP and UDP so you'll need
 // to multiplex multiple connections through one program.
@@ -29,7 +29,7 @@ func main() {
 	////////////////////////////////////////////////////
 	// First we set up the tag providers.
 	//
-	// Each one will have a path and an object that fulfills the gologix.TagProvider interface
+	// Each one will have a path and an object that fulfills the goeip.TagProvider interface
 	// We set those up and then pass them to the Router object.
 	// here we're using the build in map tag provider which just maps cip reads and writes to/from a go map
 	//
@@ -37,14 +37,14 @@ func main() {
 	// or whatever else you might need.
 	////////////////////////////////////////////////////
 
-	r := gologix.PathRouter{}
+	r := goeip.PathRouter{}
 
 	// one memory based tag provider at slot 0 on the virtual "backplane"
 	// a message to 2,xxx.xxx.xxx.xxx,1,0 (compact logix) will get this provider (where xxx.xxx.xxx.xxx is the ip address)
 	// the message path before the IP address in the msg instruction will be different based on the actual controller
 	// you're using, but the part after the IP address is what this matches
-	p1 := gologix.MapTagProvider{}
-	path1, err := gologix.ParsePath("1,0")
+	p1 := goeip.MapTagProvider{}
+	path1, err := goeip.ParsePath("1,0")
 	if err != nil {
 		log.Printf("problem parsing path. %v", err)
 		os.Exit(1)
@@ -68,15 +68,15 @@ func main() {
 	p1.TagWrite("writestring", "")
 
 	// a different memory based tag provider at slot 1 on the virtual "backplane" this would be "2,xxx.xxx.xxx.xxx,1,1" in the msg connection path
-	p2 := gologix.MapTagProvider{}
-	path2, err := gologix.ParsePath("1,1")
+	p2 := goeip.MapTagProvider{}
+	path2, err := goeip.ParsePath("1,1")
 	if err != nil {
 		log.Printf("problem parsing path. %v", err)
 		os.Exit(1)
 	}
 	r.Handle(path2.Bytes(), &p2)
 
-	s := gologix.NewServer(&r)
+	s := goeip.NewServer(&r)
 	go s.Serve()
 
 	t := time.NewTicker(time.Second * 5)

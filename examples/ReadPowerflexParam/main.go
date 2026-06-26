@@ -13,7 +13,7 @@ func main() {
 
 	// Create a new client with the PowerFlex IP address
 	// The PowerFlex drive typically uses port 44818 (default EIP port)
-	c := gologix.NewClient(ipAddress)
+	c := goeip.NewClient(ipAddress)
 	err := c.Connect()
 	if err != nil {
 		log.Fatalf("Failed to connect: %v", err)
@@ -21,13 +21,13 @@ func main() {
 
 	defer c.Disconnect()
 
-	//path, err := gologix.Serialize(
-	//gologix.CipObject_Parameter,
-	//gologix.CIPInstance(ParamNo),
-	//gologix.CIPAttribute(1),
+	//path, err := goeip.Serialize(
+	//goeip.CipObject_Parameter,
+	//goeip.CIPInstance(ParamNo),
+	//goeip.CIPAttribute(1),
 	//)
-	path := (&gologix.PathBuilder{}).
-		Class(gologix.CipObject_Parameter).
+	path := (&goeip.PathBuilder{}).
+		Class(goeip.CipObject_Parameter).
 		Instance(44). // param 44 = maximum hertz * 100
 		Attribute(1)
 	if path.Err != nil {
@@ -35,7 +35,7 @@ func main() {
 		return
 	}
 
-	result, err := c.GenericCIPMessage(gologix.CIPService_GetAttributeSingle, path.Bytes(), []byte{})
+	result, err := c.GenericCIPMessage(goeip.CIPService_GetAttributeSingle, path.Bytes(), []byte{})
 
 	if err != nil {
 		log.Fatalf("Failed to read parameter: %v", err)
@@ -50,7 +50,7 @@ func main() {
 	fmt.Printf("Parameter 44: %3.2f\n", maxhz)
 
 	// you can also read multiple parameters at once using the GetAttributeList service
-	path2, err := gologix.Serialize(gologix.CipObject_DPIParams, gologix.CIPInstance(0))
+	path2, err := goeip.Serialize(goeip.CipObject_DPIParams, goeip.CIPInstance(0))
 	if err != nil {
 		log.Printf("could not serialize path: %v", err)
 		return
@@ -59,7 +59,7 @@ func main() {
 	// a scattered read is used to read multiple parameters at once and takes a list of parameter IDs as 32 bit ints
 	// Actually, the param IDs are 16 bit ints followed by a 16 bit WRITE value.  But since we're reading we can ignore the WRITE value and
 	// use int32 to pad that area with zeroes.  If you swap to a ScatteredWrite you'd have to change this accordingly.
-	params, err := gologix.Serialize([]int32{
+	params, err := goeip.Serialize([]int32{
 		1,  // output freq
 		2,  // command freq
 		3,  // output current
@@ -73,7 +73,7 @@ func main() {
 		return
 	}
 
-	r, err := c.GenericCIPMessage(gologix.CIPService_ScatteredRead, path2.Bytes(), params.Bytes())
+	r, err := c.GenericCIPMessage(goeip.CIPService_ScatteredRead, path2.Bytes(), params.Bytes())
 
 	if err != nil {
 		log.Fatalf("Failed to read parameters: %v", err)

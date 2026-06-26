@@ -15,10 +15,10 @@ import (
 )
 
 type PLCPollData struct {
-	Testtag1 int32   `gologix:"testtag1"`
-	Testtag2 float32 `gologix:"testtag2"`
-	Testdint int32   `gologix:"testdint"`
-	Testint  int16   `gologix:"testint"`
+	Testtag1 int32   `goeip:"testtag1"`
+	Testtag2 float32 `goeip:"testtag2"`
+	Testdint int32   `goeip:"testdint"`
+	Testint  int16   `goeip:"testint"`
 }
 
 func main() {
@@ -62,7 +62,7 @@ func PollPLC(c chan PLCPollData) {
 
 	// connect
 	// Connect to the PLC.  You can hard code the address as shown or make it a parameter or something.
-	client := gologix.NewClient("localhost")
+	client := goeip.NewClient("localhost")
 	err := client.Connect()
 	if err != nil {
 		log.Printf("Error opening client: %v", err)

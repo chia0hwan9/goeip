@@ -12,7 +12,7 @@ func main() {
 	var err error
 
 	// setup the client.  If you need a different path you'll have to set that.
-	client := gologix.NewClient("192.168.2.244")
+	client := goeip.NewClient("192.168.2.244")
 	// micro8xx use no path.  So an empty buffer will give us that.
 	client.Controller.Path = &bytes.Buffer{}
 

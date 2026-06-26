@@ -1,4 +1,4 @@
-package gologix
+﻿package goeip
 
 import (
 	"bytes"
@@ -19,7 +19,7 @@ import (
 // .EN=True forever. Writes were unaffected because they go through
 // sendUnitDataReply (correct ConnID source) and carry no payload.
 //
-// The test boots the gologix server in-process, performs a connected read
+// The test boots the goeip server in-process, performs a connected read
 // end-to-end through the standard client, and asserts the response makes
 // it back with the correct value — proving the connection layer routes
 // the reply to the originator's inbound listener.

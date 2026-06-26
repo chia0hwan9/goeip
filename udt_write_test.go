@@ -1,4 +1,4 @@
-package gologix
+﻿package goeip
 
 import (
 	"strings"
@@ -13,32 +13,32 @@ func TestMultiWriteToDict(t *testing.T) {
 	}
 
 	type test_str struct {
-		TestSint          byte    `gologix:"TestSint"`
-		TestInt           int16   `gologix:"TestInt"`
-		TestDint          int32   `gologix:"TestDint"`
-		TestReal          float32 `gologix:"TestReal"`
-		TestDintArr0      int32   `gologix:"testdintarr[0]"`
-		TestDintArr0_0    bool    `gologix:"testdintarr[0].0"`
-		TestDintArr0_9    bool    `gologix:"testdintarr[0].9"`
-		TestDintArr2      int32   `gologix:"testdintarr[2]"`
-		TestUDTField1     int32   `gologix:"testudt.field1"`
-		TestUDTField2     float32 `gologix:"testudt.field2"`
-		TestUDTArr2Field1 int32   `gologix:"testudtarr[2].field1"`
-		TestUDTArr2Field2 float32 `gologix:"testudtarr[2].field2"`
+		TestSint          byte    `goeip:"TestSint"`
+		TestInt           int16   `goeip:"TestInt"`
+		TestDint          int32   `goeip:"TestDint"`
+		TestReal          float32 `goeip:"TestReal"`
+		TestDintArr0      int32   `goeip:"testdintarr[0]"`
+		TestDintArr0_0    bool    `goeip:"testdintarr[0].0"`
+		TestDintArr0_9    bool    `goeip:"testdintarr[0].9"`
+		TestDintArr2      int32   `goeip:"testdintarr[2]"`
+		TestUDTField1     int32   `goeip:"testudt.field1"`
+		TestUDTField2     float32 `goeip:"testudt.field2"`
+		TestUDTArr2Field1 int32   `goeip:"testudtarr[2].field1"`
+		TestUDTArr2Field2 float32 `goeip:"testudtarr[2].field2"`
 	}
 
 	type test_str2 struct {
-		TestSint          byte    `gologix:"TestSint"`
-		TestInt           int16   `gologix:"TestInt"`
-		TestDint          int32   `gologix:"TestDint"`
-		TestReal          float32 `gologix:"TestReal"`
-		TestDintArr0      int32   `gologix:"testdintarr[0]"`
-		TestDintArr0_0    bool    `gologix:"testdintarr[0].0"`
-		TestDintArr0_9    bool    `gologix:"testdintarr[0].9"`
-		TestDintArr2      int32   `gologix:"testdintarr[2]"`
-		TestUDT           TestUDT `gologix:"testudt"`
-		TestUDTArr2Field1 int32   `gologix:"testudtarr[2].field1"`
-		TestUDTArr2Field2 float32 `gologix:"testudtarr[2].field2"`
+		TestSint          byte    `goeip:"TestSint"`
+		TestInt           int16   `goeip:"TestInt"`
+		TestDint          int32   `goeip:"TestDint"`
+		TestReal          float32 `goeip:"TestReal"`
+		TestDintArr0      int32   `goeip:"testdintarr[0]"`
+		TestDintArr0_0    bool    `goeip:"testdintarr[0].0"`
+		TestDintArr0_9    bool    `goeip:"testdintarr[0].9"`
+		TestDintArr2      int32   `goeip:"testdintarr[2]"`
+		TestUDT           TestUDT `goeip:"testudt"`
+		TestUDTArr2Field1 int32   `goeip:"testudtarr[2].field1"`
+		TestUDTArr2Field2 float32 `goeip:"testudtarr[2].field2"`
 	}
 
 	read := test_str{

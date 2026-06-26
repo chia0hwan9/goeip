@@ -44,24 +44,24 @@ func main() {
 	////////////////////////////////////////////////////
 	// First we set up the tag providers.
 	//
-	// Each one will have a path and an object that fulfills the gologix.TagProvider interface
+	// Each one will have a path and an object that fulfills the goeip.TagProvider interface
 	// We set those up and then pass them to the Router object.
 	// here we're using the build in io tag provider which just has 10 bytes of inputs and 10 bytes of outputs
 	//
 	////////////////////////////////////////////////////
 
-	r := gologix.PathRouter{}
+	r := goeip.PathRouter{}
 
 	// define the Input and Output instances.  (Input and output here is from the plc's perspective)
 	inInstance := InStr{}
 	outInstance := OutStr{}
 
-	p3 := gologix.IOProvider[InStr, OutStr]{
+	p3 := goeip.IOProvider[InStr, OutStr]{
 		In:  &inInstance,
 		Out: &outInstance,
 	}
 
-	path3, err := gologix.ParsePath("1,0")
+	path3, err := goeip.ParsePath("1,0")
 	if err != nil {
 		log.Printf("problem parsing path. %v", err)
 		os.Exit(1)
@@ -70,14 +70,14 @@ func main() {
 	path_bytes := path3.Bytes()
 
 	// if you want to use a "generic ethernet module" instead of a "generic ethernet bridge" you can use this path
-	// I'm not sure if this is always the case or if it's just the way I have it set up.  Either way if you set up the gologix server
+	// I'm not sure if this is always the case or if it's just the way I have it set up.  Either way if you set up the goeip server
 	// in your hardware tree and get an error of the form "no tag provider for path [52 4]" but with different numbers, let me know
 	// and try those instead.
 	//path_bytes := []byte{52, 4}
 
 	r.Handle(path_bytes, &p3)
 
-	s := gologix.NewServer(&r)
+	s := goeip.NewServer(&r)
 	go s.Serve()
 
 	t := time.NewTicker(time.Second)

@@ -16,7 +16,7 @@ func TestTimerRead(t *testing.T) {
 	tcs := getTestConfig()
 	for _, tc := range tcs.TagReadWriteTests {
 		t.Run(tc.PlcAddress, func(t *testing.T) {
-			client := gologix.NewClient(tc.PlcAddress)
+			client := goeip.NewClient(tc.PlcAddress)
 			err := client.Connect()
 			if err != nil {
 				t.Error(err)
@@ -35,7 +35,7 @@ func TestTimerRead(t *testing.T) {
 				return
 			}
 			time.Sleep(time.Millisecond * 100) // delay to make sure the timer off bit was picked up by the program in the PLC
-			//have, err := gologix.ReadPacked[udt2](client, "Program:gologix_tests.ReadUDT2")
+			//have, err := goeip.ReadPacked[udt2](client, "Program:gologix_tests.ReadUDT2")
 			err = client.Read("Program:gologix_tests.TestTimer", &tmr)
 			log.Printf("timer 1: %+v", tmr)
 
@@ -133,12 +133,12 @@ func TestTimerRead(t *testing.T) {
 
 			// make sure we can go the other way and recover it.
 			b := bytes.Buffer{}
-			_, err = gologix.Pack(&b, tmr)
+			_, err = goeip.Pack(&b, tmr)
 			if err != nil {
 				t.Errorf("problem packing data: %v", err)
 			}
 			var tmr2 lgxtypes.TIMER
-			_, err = gologix.Unpack(&b, &tmr2)
+			_, err = goeip.Unpack(&b, &tmr2)
 			if err != nil {
 				t.Errorf("problem unpacking timer: %v", err)
 			}
@@ -171,7 +171,7 @@ func TestTimerStructRead(t *testing.T) {
 	tcs := getTestConfig()
 	for _, tc := range tcs.TagReadWriteTests {
 		t.Run(tc.PlcAddress, func(t *testing.T) {
-			client := gologix.NewClient(tc.PlcAddress)
+			client := goeip.NewClient(tc.PlcAddress)
 			err := client.Connect()
 			if err != nil {
 				t.Error(err)
@@ -192,7 +192,7 @@ func TestTimerStructRead(t *testing.T) {
 				Field1 int32
 			}{}
 
-			//have, err := gologix.ReadPacked[udt2](client, "Program:gologix_tests.ReadUDT2")
+			//have, err := goeip.ReadPacked[udt2](client, "Program:gologix_tests.ReadUDT2")
 			err = client.Read("Program:gologix_tests.TestTimerStruct", &x)
 			if err != nil {
 				t.Errorf("problem reading timer data: %v", err)

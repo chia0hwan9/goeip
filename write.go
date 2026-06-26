@@ -1,4 +1,4 @@
-package gologix
+﻿package goeip
 
 import (
 	"bytes"
@@ -7,19 +7,19 @@ import (
 	"reflect"
 )
 
-// WriteMulti writes multiple tags efficiently in a single request using a struct with gologix field tags.
+// WriteMulti writes multiple tags efficiently in a single request using a struct with goeip field tags.
 //
-// The value parameter must be a struct where each field has a `gologix:"tagname"` tag 
+// The value parameter must be a struct where each field has a `goeip:"tagname"` tag 
 // that specifies which PLC tag to write to. Field types must correspond to the correct 
 // CIP types as documented in types.go.
 //
 // Example:
 //   type MyWriteTags struct {
-//       IntTag     int16     `gologix:"TestInt"`
-//       RealTag    float32   `gologix:"TestReal"`  
-//       DintTag    int32     `gologix:"TestDint"`
-//       BoolTag    bool      `gologix:"TestBool"`
-//       StringTag  string    `gologix:"TestString"`
+//       IntTag     int16     `goeip:"TestInt"`
+//       RealTag    float32   `goeip:"TestReal"`  
+//       DintTag    int32     `goeip:"TestDint"`
+//       BoolTag    bool      `goeip:"TestBool"`
+//       StringTag  string    `goeip:"TestString"`
 //   }
 //
 //   writeValues := MyWriteTags{
@@ -38,7 +38,7 @@ import (
 //       Field2 float32  
 //   }
 //   type WriteTags struct {
-//       UDTTag MyUDT `gologix:"MyUDTTag"`
+//       UDTTag MyUDT `goeip:"MyUDTTag"`
 //   }
 //
 // For writing using a map instead of a struct, use WriteMap.
@@ -59,7 +59,7 @@ func (client *Client) WriteMulti(value any) error {
 		}
 		return client.WriteMap(d)
 	}
-	return fmt.Errorf("value must be a struct with gologix tags")
+	return fmt.Errorf("value must be a struct with goeip tags")
 }
 
 // Write writes a single value to a single tag in the PLC.

@@ -44,28 +44,28 @@ func main() {
 	////////////////////////////////////////////////////
 	// First we set up the tag providers.
 	//
-	// Each one will have a path and an object that fulfills the gologix.TagProvider interface
+	// Each one will have a path and an object that fulfills the goeip.TagProvider interface
 	// We set those up and then pass them to the Router object.
 	// here we're using the build in io tag provider which just has 10 bytes of inputs and 10 bytes of outputs
 	//
 	////////////////////////////////////////////////////
 
-	r := gologix.PathRouter{}
+	r := goeip.PathRouter{}
 
 	// define the Input and Output instances.  (Input and output here is from the plc's perspective)
 	inInstance := InStr{}
 
 	// an IO handler in slot 2
-	//p3 := gologix.IOProvider[InStr, OutStr]{}
-	p3 := gologix.IOChannelProvider[InStr, OutStr]{}
-	path3, err := gologix.ParsePath("1,2")
+	//p3 := goeip.IOProvider[InStr, OutStr]{}
+	p3 := goeip.IOChannelProvider[InStr, OutStr]{}
+	path3, err := goeip.ParsePath("1,2")
 	if err != nil {
 		log.Printf("problem parsing path. %v", err)
 		os.Exit(1)
 	}
 	r.Handle(path3.Bytes(), &p3)
 
-	s := gologix.NewServer(&r)
+	s := goeip.NewServer(&r)
 	go s.Serve()
 
 	t := time.NewTicker(time.Second)

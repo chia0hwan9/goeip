@@ -12,7 +12,7 @@ func TestGetAttrSingle(t *testing.T) {
 	tcs := getTestConfig()
 	for _, tc := range tcs.TagReadWriteTests {
 		t.Run(tc.PlcAddress, func(t *testing.T) {
-			client := gologix.NewClient(tc.PlcAddress)
+			client := goeip.NewClient(tc.PlcAddress)
 			err := client.Connect()
 			if err != nil {
 				t.Error(err)
@@ -26,7 +26,7 @@ func TestGetAttrSingle(t *testing.T) {
 			}()
 
 			//VendorID (UINT, attribute 1)
-			i, err := client.GetAttrSingle(gologix.CipObject_Identity, 1, 1)
+			i, err := client.GetAttrSingle(goeip.CipObject_Identity, 1, 1)
 			if err != nil {
 				t.Errorf("problem reading items: %v", err)
 			}
@@ -43,7 +43,7 @@ func TestGetAttrSingle(t *testing.T) {
 
 			//
 			//DeviceType (UINT, attribute 2)
-			i, err = client.GetAttrSingle(gologix.CipObject_Identity, 1, 2)
+			i, err = client.GetAttrSingle(goeip.CipObject_Identity, 1, 2)
 			if err != nil {
 				t.Errorf("problem reading items: %v", err)
 			}
@@ -58,7 +58,7 @@ func TestGetAttrSingle(t *testing.T) {
 			}
 
 			//ProductCode (UINT, attribute 3)
-			i, err = client.GetAttrSingle(gologix.CipObject_Identity, 1, 3)
+			i, err = client.GetAttrSingle(goeip.CipObject_Identity, 1, 3)
 			if err != nil {
 				t.Errorf("problem reading items: %v", err)
 			}
@@ -74,7 +74,7 @@ func TestGetAttrSingle(t *testing.T) {
 
 			//MajorRevision (USINT, attribute 4)
 			//MinorRevision (USINT, attribute 4)
-			i, err = client.GetAttrSingle(gologix.CipObject_Identity, 1, 4)
+			i, err = client.GetAttrSingle(goeip.CipObject_Identity, 1, 4)
 			if err != nil {
 				t.Errorf("problem reading items: %v", err)
 			}
@@ -94,7 +94,7 @@ func TestGetAttrSingle(t *testing.T) {
 			}
 
 			//Status (UINT, attribute 5)
-			i, err = client.GetAttrSingle(gologix.CipObject_Identity, 1, 5)
+			i, err = client.GetAttrSingle(goeip.CipObject_Identity, 1, 5)
 			if err != nil {
 				t.Errorf("problem reading items: %v", err)
 			}
@@ -106,7 +106,7 @@ func TestGetAttrSingle(t *testing.T) {
 			log.Printf("status: 0x%X", val)
 
 			//SerialNumber (UDINT, attribute 6)
-			i, err = client.GetAttrSingle(gologix.CipObject_Identity, 1, 6)
+			i, err = client.GetAttrSingle(goeip.CipObject_Identity, 1, 6)
 			if err != nil {
 				t.Errorf("problem reading items: %v", err)
 			}
@@ -121,7 +121,7 @@ func TestGetAttrSingle(t *testing.T) {
 			}
 
 			//ProductName (STR_32, attribute 7)
-			i, err = client.GetAttrSingle(gologix.CipObject_Identity, 1, 7)
+			i, err = client.GetAttrSingle(goeip.CipObject_Identity, 1, 7)
 			if err != nil {
 				t.Errorf("problem reading items: %v", err)
 			}
@@ -133,7 +133,7 @@ func TestGetAttrSingle(t *testing.T) {
 			}
 
 			// test multi-byte instance
-			_, err = client.GetAttrSingle(gologix.CipObject_Assembly, 0x303, 0x03)
+			_, err = client.GetAttrSingle(goeip.CipObject_Assembly, 0x303, 0x03)
 			if err != nil {
 				t.Errorf("problem reading items: %v", err)
 			}
@@ -146,7 +146,7 @@ func TestGetCtrlProps(t *testing.T) {
 	tcs := getTestConfig()
 	for _, tc := range tcs.TagReadWriteTests {
 		t.Run(tc.PlcAddress, func(t *testing.T) {
-			client := gologix.NewClient(tc.PlcAddress)
+			client := goeip.NewClient(tc.PlcAddress)
 			err := client.Connect()
 			if err != nil {
 				t.Error(err)
@@ -173,7 +173,7 @@ func TestGetAttrList(t *testing.T) {
 	tcs := getTestConfig()
 	for _, tc := range tcs.TagReadWriteTests {
 		t.Run(tc.PlcAddress, func(t *testing.T) {
-			client := gologix.NewClient(tc.PlcAddress)
+			client := goeip.NewClient(tc.PlcAddress)
 			err := client.Connect()
 			if err != nil {
 				t.Error(err)
@@ -187,7 +187,7 @@ func TestGetAttrList(t *testing.T) {
 			}()
 
 			//VendorID (UINT, attribute 1)
-			i, err := client.GetAttrList(gologix.CipObject_Identity, 1,
+			i, err := client.GetAttrList(goeip.CipObject_Identity, 1,
 				1, 2, 3, 4, 6, 7) // properties
 			if err != nil {
 				t.Errorf("problem reading items: %v", err)

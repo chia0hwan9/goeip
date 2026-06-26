@@ -1,4 +1,4 @@
-package gologix
+﻿package goeip
 
 import (
 	"fmt"
@@ -31,7 +31,7 @@ func (client *Client) startDisconnect() error {
 // Always call Disconnect() after a successful Connect() to ensure proper cleanup.
 // It's recommended to use defer for this:
 //
-//	client := gologix.NewClient("192.168.1.100")
+//	client := goeip.NewClient("192.168.1.100")
 //	err := client.Connect()
 //	if err != nil {
 //	    log.Fatal(err)

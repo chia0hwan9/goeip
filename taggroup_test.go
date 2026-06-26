@@ -1,4 +1,4 @@
-package gologix
+﻿package goeip
 
 import (
 	"reflect"
@@ -207,7 +207,7 @@ func TestTagGroupResultUint32(t *testing.T) {
 		t.Errorf("Uint32(uint32) = %d, %v; want %d, nil", u, err, uint32(0x80000001))
 	}
 
-	// Test with int32→uint32 coercion (common: gologix returns int32 for DINT)
+	// Test with int32→uint32 coercion (common: goeip returns int32 for DINT)
 	r2 := &TagGroupResult{values: map[string]any{"b": int32(-1)}}
 	u2, err := r2.Uint32("b")
 	if err != nil || u2 != 0xFFFFFFFF {

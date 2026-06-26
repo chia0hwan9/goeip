@@ -24,7 +24,7 @@ func TestReadPartialTransferHardwareLongDints(t *testing.T) {
 			continue
 		}
 		t.Run(tc.PlcAddress, func(t *testing.T) {
-			client := gologix.NewClient(tc.PlcAddress)
+			client := goeip.NewClient(tc.PlcAddress)
 			// 256-byte connection so the 400-byte LongDints[100] response
 			// cannot fit in a single CIP packet, forcing the controller to
 			// split the reply across multiple FragRead requests.

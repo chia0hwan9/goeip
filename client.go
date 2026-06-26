@@ -1,4 +1,4 @@
-package gologix
+﻿package goeip
 
 import (
 	"bytes"
@@ -125,12 +125,12 @@ type Client struct {
 // For devices not in a ControlLogix/CompactLogix rack (such as Micro800 series,
 // PowerFlex drives, or I/O modules), change the path after creation:
 //
-//	client := gologix.NewClient("192.168.1.100")
+//	client := goeip.NewClient("192.168.1.100")
 //	client.Controller.Path = &bytes.Buffer{}  // Empty path for some devices
 //
 // For PLCs in different slots, update the path:
 //
-//	client.Controller.Path, _ = gologix.ParsePath("1,2")  // Backplane, slot 2
+//	client.Controller.Path, _ = goeip.ParsePath("1,2")  // Backplane, slot 2
 //
 // Other common configurations:
 //
@@ -141,7 +141,7 @@ type Client struct {
 //
 // Example:
 //
-//	client := gologix.NewClient("192.168.1.100")
+//	client := goeip.NewClient("192.168.1.100")
 //	err := client.Connect()
 //	if err != nil {
 //	    log.Fatal(err)

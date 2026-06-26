@@ -7,7 +7,7 @@ import (
 )
 
 func TestDataTableBuffer(t *testing.T) {
-	client := gologix.NewClient("192.168.2.241")
+	client := goeip.NewClient("192.168.2.241")
 	if err := client.Connect(); err != nil {
 		t.Fatalf("Error opening client: %v", err)
 	}
@@ -23,10 +23,10 @@ func TestDataTableBuffer(t *testing.T) {
 	if err := buf.AddTagRef("TestDint", &x); err != nil {
 		t.Fatalf("Error adding DINT tag: %v", err)
 	}
-	if err := buf.AddTag("TestReal", gologix.CIPTypeREAL); err != nil {
+	if err := buf.AddTag("TestReal", goeip.CIPTypeREAL); err != nil {
 		t.Fatalf("Error adding REAL tag: %v", err)
 	}
-	if err := buf.AddTag("TestInt", gologix.CIPTypeINT); err != nil {
+	if err := buf.AddTag("TestInt", goeip.CIPTypeINT); err != nil {
 		t.Fatalf("Error adding INT tag: %v", err)
 	}
 
@@ -53,11 +53,11 @@ func TestDataTableBuffer(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Error creating datatable buffer: %v", err)
 	}
-	if err := buf.AddTags(map[string]gologix.CIPType{
-		"TestDint":   gologix.CIPTypeDINT,
-		"TestReal":   gologix.CIPTypeREAL,
-		"TestInt":    gologix.CIPTypeINT,
-		"TestString": gologix.CIPTypeSTRING,
+	if err := buf.AddTags(map[string]goeip.CIPType{
+		"TestDint":   goeip.CIPTypeDINT,
+		"TestReal":   goeip.CIPTypeREAL,
+		"TestInt":    goeip.CIPTypeINT,
+		"TestString": goeip.CIPTypeSTRING,
 	}); err != nil {
 		t.Fatalf("Error batch-adding tags: %v", err)
 	}
@@ -84,17 +84,17 @@ func TestDataTableBuffer(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Error creating datatable buffer: %v", err)
 	}
-	group := gologix.NewTagGroup(
-		gologix.TagDef{Name: "TestDintArr[{0}]", Type: gologix.CIPTypeDINT, Elements: 3},
-		gologix.TagDef{Name: "TestReal", Type: gologix.CIPTypeREAL},
+	group := goeip.NewTagGroup(
+		goeip.TagDef{Name: "TestDintArr[{0}]", Type: goeip.CIPTypeDINT, Elements: 3},
+		goeip.TagDef{Name: "TestReal", Type: goeip.CIPTypeREAL},
 	)
 	if err := buf.AddTagGroup(group, 0); err != nil {
 		t.Fatalf("Error adding tag group: %v", err)
 	}
 
 	type MyStruct struct {
-		TestDint int32 `gologix:"program:gologix_tests.{0}.Field1"`
-		TestInt  int16 `gologix:"TestInt"`
+		TestDint int32 `goeip:"program:gologix_tests.{0}.Field1"`
+		TestInt  int16 `goeip:"TestInt"`
 	}
 	var s MyStruct
 	if err := buf.AddTaggedStruct(&s, "readudt"); err != nil {

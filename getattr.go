@@ -1,4 +1,4 @@
-package gologix
+﻿package goeip
 
 import (
 	"encoding/binary"
@@ -34,9 +34,9 @@ type cipAttributeResponseHdr struct {
 //  1. Reading device vendor information:
 //     // Get Vendor ID (attribute 1) from Identity Object
 //     result, err := client.GetAttrSingle(
-//     gologix.CipObject_Identity,
-//     gologix.CIPInstance(1),
-//     gologix.CIPAttribute(1),
+//     goeip.CipObject_Identity,
+//     goeip.CIPInstance(1),
+//     goeip.CIPAttribute(1),
 //     )
 //     if err != nil {
 //     log.Fatal(err)
@@ -49,9 +49,9 @@ type cipAttributeResponseHdr struct {
 //  2. Reading device product information:
 //     // Get Product Code (attribute 3) from Identity Object
 //     result, err := client.GetAttrSingle(
-//     gologix.CipObject_Identity,
-//     gologix.CIPInstance(1),
-//     gologix.CIPAttribute(3),
+//     goeip.CipObject_Identity,
+//     goeip.CIPInstance(1),
+//     goeip.CIPAttribute(3),
 //     )
 //     if err != nil {
 //     log.Fatal(err)
@@ -64,9 +64,9 @@ type cipAttributeResponseHdr struct {
 //  3. Reading controller-specific attributes:
 //     // Get controller information
 //     result, err := client.GetAttrSingle(
-//     gologix.CipObject_ControllerInfo,
-//     gologix.CIPInstance(1),
-//     gologix.CIPAttribute(1), // Controller property
+//     goeip.CipObject_ControllerInfo,
+//     goeip.CIPInstance(1),
+//     goeip.CIPAttribute(1), // Controller property
 //     )
 //     if err != nil {
 //     log.Fatal(err)
@@ -78,9 +78,9 @@ type cipAttributeResponseHdr struct {
 //  4. Reading current time from controller:
 //     // Get microseconds since Unix epoch from Time Object
 //     result, err := client.GetAttrSingle(
-//     gologix.CipObject_TIME,
-//     gologix.CIPInstance(1),
-//     gologix.CIPAttribute(11), // Time attribute
+//     goeip.CipObject_TIME,
+//     goeip.CIPInstance(1),
+//     goeip.CIPAttribute(11), // Time attribute
 //     )
 //     if err != nil {
 //     log.Fatal(err)
@@ -344,13 +344,13 @@ func (e CIPStatusError) Error() string {
 // The path parameter must be constructed using the Serialize() function:
 //
 //	// Target a specific object and instance
-//	path, err := gologix.Serialize(gologix.CipObject_TIME, gologix.CIPInstance(1))
+//	path, err := goeip.Serialize(goeip.CipObject_TIME, goeip.CIPInstance(1))
 //
 //	// Target a specific attribute of an object
-//	path, err := gologix.Serialize(
-//	    gologix.CIPClass(1),        // Identity Object
-//	    gologix.CIPInstance(1),     // Instance 1
-//	    gologix.CIPAttribute(1),    // Vendor ID attribute
+//	path, err := goeip.Serialize(
+//	    goeip.CIPClass(1),        // Identity Object
+//	    goeip.CIPInstance(1),     // Instance 1
+//	    goeip.CIPAttribute(1),    // Vendor ID attribute
 //	)
 //
 // Response Parsing:
@@ -369,37 +369,37 @@ func (e CIPStatusError) Error() string {
 // Common Use Cases:
 //
 //  1. Reading controller time:
-//     path, _ := gologix.Serialize(gologix.CipObject_TIME, gologix.CIPInstance(1))
+//     path, _ := goeip.Serialize(goeip.CipObject_TIME, goeip.CIPInstance(1))
 //     result, err := client.GenericCIPMessage(
-//     gologix.CIPService_GetAttributeList,
+//     goeip.CIPService_GetAttributeList,
 //     path.Bytes(),
 //     []byte{0x01, 0x00, 0x0B, 0x00}, // Request attribute 11 (time)
 //     )
 //
 //  2. Accessing controller run mode:
-//     path, _ := gologix.Serialize(gologix.CipObject_RunMode, gologix.CIPInstance(1))
+//     path, _ := goeip.Serialize(goeip.CipObject_RunMode, goeip.CIPInstance(1))
 //     result, err := client.GenericCIPMessage(
-//     gologix.CIPService_GetAttributeSingle,
+//     goeip.CIPService_GetAttributeSingle,
 //     path.Bytes(),
 //     []byte{},
 //     )
 //
 //  3. Controller control operations (requires elevated privileges):
-//     path, _ := gologix.Serialize(gologix.CipObject_RunMode, gologix.CIPInstance(1))
+//     path, _ := goeip.Serialize(goeip.CipObject_RunMode, goeip.CIPInstance(1))
 //     result, err := client.GenericCIPMessage(
-//     gologix.CIPService_Stop,  // Will likely fail without proper privileges
+//     goeip.CIPService_Stop,  // Will likely fail without proper privileges
 //     path.Bytes(),
 //     []byte{},
 //     )
 //
 //  4. Reading device identity information:
-//     path, _ := gologix.Serialize(
-//     gologix.CipObject_Identity,
-//     gologix.CIPInstance(1),
-//     gologix.CIPAttribute(1), // Vendor ID
+//     path, _ := goeip.Serialize(
+//     goeip.CipObject_Identity,
+//     goeip.CIPInstance(1),
+//     goeip.CIPAttribute(1), // Vendor ID
 //     )
 //     result, err := client.GenericCIPMessage(
-//     gologix.CIPService_GetAttributeSingle,
+//     goeip.CIPService_GetAttributeSingle,
 //     path.Bytes(),
 //     []byte{},
 //     )
